@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/path"
+        android:icon="@drawable/ic_path"
+        android:title="Path" />
+
+    <item
+        android:id="@+id/social"
+        android:icon="@drawable/ic_cookiehouse"
+        android:title="CookieHouse" />
+
+    <item
+        android:id="@+id/places"
+        android:icon="@drawable/ic_places"
+        android:title="Places" />
+</menu>

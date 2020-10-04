@@ -9,13 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+<!--        <meta-data-->
+<!--            android:name="com.google.android.actions"-->
+<!--            android:resource="@xml/actions" />-->
+
+        <activity android:name=".activity.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.PathActivity" />
+        <activity android:name=".activity.SocialActivity" />
+        <activity android:name=".activity.PlacesActivity" />
+        <activity android:name=".activity.MyPageActivity" />
+
+
+
+
+
     </application>
 
 </manifest>
