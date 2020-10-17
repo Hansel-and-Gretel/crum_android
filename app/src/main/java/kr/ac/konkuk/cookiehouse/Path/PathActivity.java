@@ -26,7 +26,6 @@ public class PathActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate : started");
 
 
-
         setupBottomNavigationView();
     }
 
