@@ -11,10 +11,10 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kr.ac.konkuk.cookiehouse.R;
-import kr.ac.konkuk.cookiehouse.activity.MainActivity;
-import kr.ac.konkuk.cookiehouse.activity.PathActivity;
-import kr.ac.konkuk.cookiehouse.activity.PlacesActivity;
-import kr.ac.konkuk.cookiehouse.activity.SocialActivity;
+import kr.ac.konkuk.cookiehouse.Home.MainActivity;
+import kr.ac.konkuk.cookiehouse.Path.PathActivity;
+import kr.ac.konkuk.cookiehouse.Places.PlacesActivity;
+import kr.ac.konkuk.cookiehouse.Social.SocialActivity;
 
 public class BottomNavigationViewHelper {
     private static final String TAG = "BottomNavigationViewHel";
