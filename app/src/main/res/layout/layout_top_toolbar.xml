@@ -17,6 +17,7 @@
                 android:layout_height="?actionBarSize"
                 android:background="@color/colorSkyblue"
                 app:menu="@menu/toolbar_menu"
+                android:paddingRight="5dp"
                 >
 
                 <TextView

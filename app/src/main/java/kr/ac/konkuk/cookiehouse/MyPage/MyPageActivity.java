@@ -1,10 +1,8 @@
-package kr.ac.konkuk.cookiehouse.activity;
+package kr.ac.konkuk.cookiehouse.MyPage;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,10 +12,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
 
-public class SocialActivity extends AppCompatActivity {
-    private static final String TAG = "SocialActivity";
-    private static final int ACTIVITY_NUM=2;
-    private Context mContext = SocialActivity.this;
+public class MyPageActivity extends AppCompatActivity {
+    private static final String TAG = "MyPageActivity";
+//    private static final int ACTIVITY_NUM=2;
+    private Context mContext = MyPageActivity.this;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +26,7 @@ public class SocialActivity extends AppCompatActivity {
         setupBottomNavigationView();
     }
 
+
     /*
      * Bottom Navigation view setup
      * */
@@ -35,11 +34,12 @@ public class SocialActivity extends AppCompatActivity {
         Log.d(TAG,"SetupBottomNavigationView : setting up BottomNavigationView");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
+//        Menu menu = bottomNavigationView.getMenu();
+//        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+//        menuItem.setChecked(true);
 
     }
+
 
 
 }

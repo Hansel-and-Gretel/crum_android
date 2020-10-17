@@ -1,4 +1,4 @@
-package kr.ac.konkuk.cookiehouse.activity;
+package kr.ac.konkuk.cookiehouse.Places;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,10 +22,10 @@ public class PlacesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate : started");
 
-//        setupBottomNavigationView();
+        setupBottomNavigationView();
     }
 
 

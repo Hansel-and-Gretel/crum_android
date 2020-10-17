@@ -13,17 +13,17 @@
 <!--            android:name="com.google.android.actions"-->
 <!--            android:resource="@xml/actions" />-->
 
-        <activity android:name=".activity.MainActivity" >
+        <activity android:name=".Home.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PathActivity" />
-        <activity android:name=".activity.SocialActivity" />
-        <activity android:name=".activity.PlacesActivity" />
-        <activity android:name=".activity.MyPageActivity" />
+        <activity android:name=".Path.PathActivity" />
+        <activity android:name=".Social.SocialActivity" />
+        <activity android:name=".Places.PlacesActivity" />
+        <activity android:name=".MyPage.MyPageActivity" />
 
 
 

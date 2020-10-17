@@ -1,20 +1,13 @@
-package kr.ac.konkuk.cookiehouse.activity;
+package kr.ac.konkuk.cookiehouse.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowInsetsController;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
-
-import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 public class MainActivity extends AppCompatActivity {
 
