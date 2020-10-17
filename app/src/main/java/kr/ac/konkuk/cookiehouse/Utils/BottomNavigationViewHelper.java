@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import kr.ac.konkuk.cookiehouse.MyPage.MyPageActivity;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Home.MainActivity;
 import kr.ac.konkuk.cookiehouse.Path.PathActivity;
@@ -50,6 +51,12 @@ public class BottomNavigationViewHelper {
                         Intent intent4 = new Intent(context, PlacesActivity.class); //ACTIVITY_NUM=3
                         context.startActivity(intent4);
                         break;
+
+                    case R.id.mypage:
+                        Intent intent5 = new Intent(context, MyPageActivity.class); //ACTIVITY_NUM=4
+                        context.startActivity(intent5);
+                        break;
+
                 }
 
 

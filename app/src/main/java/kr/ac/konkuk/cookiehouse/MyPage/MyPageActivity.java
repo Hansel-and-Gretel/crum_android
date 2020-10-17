@@ -3,6 +3,8 @@ package kr.ac.konkuk.cookiehouse.MyPage;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +16,7 @@ import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
 
 public class MyPageActivity extends AppCompatActivity {
     private static final String TAG = "MyPageActivity";
-//    private static final int ACTIVITY_NUM=2;
+    private static final int ACTIVITY_NUM = 4;    //bottomnavigationviewhelper
     private Context mContext = MyPageActivity.this;
 
     @Override
@@ -34,9 +36,9 @@ public class MyPageActivity extends AppCompatActivity {
         Log.d(TAG,"SetupBottomNavigationView : setting up BottomNavigationView");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
-//        Menu menu = bottomNavigationView.getMenu();
-//        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-//        menuItem.setChecked(true);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
 
     }
 
