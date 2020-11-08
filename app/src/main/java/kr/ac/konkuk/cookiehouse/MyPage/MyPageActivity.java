@@ -1,4 +1,4 @@
-package kr.ac.konkuk.cookiehouse.activity;
+package kr.ac.konkuk.cookiehouse.MyPage;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
 
-public class SocialActivity extends AppCompatActivity {
-    private static final String TAG = "SocialActivity";
-    private static final int ACTIVITY_NUM=2;
-    private Context mContext = SocialActivity.this;
+public class MyPageActivity extends AppCompatActivity {
+    private static final String TAG = "MyPageActivity";
+    private static final int ACTIVITY_NUM = 4;    //bottomnavigationviewhelper
+    private Context mContext = MyPageActivity.this;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class SocialActivity extends AppCompatActivity {
 
         setupBottomNavigationView();
     }
+
 
     /*
      * Bottom Navigation view setup
@@ -40,6 +41,7 @@ public class SocialActivity extends AppCompatActivity {
         menuItem.setChecked(true);
 
     }
+
 
 
 }

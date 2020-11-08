@@ -12,5 +12,7 @@
     <color name="colorMustard">#F3BE34</color>
     <color name="colorDred">#CD3636</color>
     <color name="colorLgray">#BCBCBC</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>
