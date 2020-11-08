@@ -19,6 +19,8 @@ public class PlacesActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM=3;
     private Context mContext = PlacesActivity.this;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
