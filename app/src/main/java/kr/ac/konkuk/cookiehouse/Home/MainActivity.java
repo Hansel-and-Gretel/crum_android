@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         //nav bar
         setupBottomNavigationView();
-        setUpViewPager();
+//        setUpViewPager();
 
     }
 

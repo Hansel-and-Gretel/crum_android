@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp">
 
@@ -15,7 +15,8 @@
             android:id="@+id/link_journey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="70dp"
             android:text="Your Current Journey"
             android:gravity="center"
             android:textSize="25sp"
@@ -26,7 +27,7 @@
             android:id="@+id/btn_current_journey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="15dp"
             android:layout_below="@id/link_journey"
             android:background="@drawable/blue_rounded_button_vivid"
             android:padding="8dp"
@@ -40,7 +41,7 @@
             android:id="@+id/btn_start_new_journey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="15dp"
             android:layout_below="@id/btn_current_journey"
             android:background="@drawable/blue_rounded_button_empty"
             android:padding="12dp"
@@ -52,7 +53,8 @@
             android:id="@+id/link_new_journey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_below="@id/btn_start_new_journey"
             android:text="Finish this journey and start a new one"
             android:gravity="center"
@@ -63,9 +65,10 @@
             android:id="@+id/link_archived_journeys"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
             android:layout_below="@id/link_new_journey"
-            android:text="- OR -\n\nClick below to see previous jouneys"
+            android:text="- OR -\n\n\n Click below to see previous jouneys"
             android:gravity="center"
             android:textSize="16sp"
             android:textColor="@color/colorTextGrey"/>
@@ -75,7 +78,7 @@
             android:id="@+id/btn_previous_journey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="30dp"
             android:layout_below="@id/link_archived_journeys"
             android:background="@drawable/blue_rounded_button_filled"
             android:padding="12dp"
@@ -85,4 +88,5 @@
 
 
     </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/bottom_nav"></include>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
