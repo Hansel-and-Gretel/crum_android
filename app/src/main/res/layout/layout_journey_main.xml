@@ -1,88 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="100dp"
+    android:paddingHorizontal="40dp"
+    tools:layout_editor_absoluteX="-16dp"
+    tools:layout_editor_absoluteY="0dp">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/text_journey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp">
+        android:gravity="center"
+        android:text="Your Current Journey"
+        android:textColor="@color/colorNavy"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="252dp" />
 
-        <TextView
-            android:id="@+id/link_journey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:text="Your Current Journey"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorNavy"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_current_journey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_below="@id/link_journey"
-            android:background="@drawable/blue_rounded_button_vivid"
-            android:padding="8dp"
-            android:text="@string/Journey1"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_current_journey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_journey"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/blue_rounded_button_vivid"
+        android:padding="8dp"
+        android:text="@string/Journey1"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_start_new_journey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_current_journey"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/blue_rounded_button_empty"
+        android:padding="12dp"
+        android:text="+ Start NEW JOURNEY"
+        android:textColor="@color/colorSkyblue"
+        android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_start_new_journey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_below="@id/btn_current_journey"
-            android:background="@drawable/blue_rounded_button_empty"
-            android:padding="12dp"
-            android:text="+ Start NEW JOURNEY"
-            android:textColor="@color/colorSkyblue"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/link_new_journey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_start_new_journey"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:text="Finish this journey and start a new one"
+        android:textColor="@color/colorTextNormal"
+        android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/link_new_journey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:layout_below="@id/btn_start_new_journey"
-            android:text="Finish this journey and start a new one"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/colorTextGrey"/>
+    <TextView
+        android:id="@+id/link_archived_journeys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/link_new_journey"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="- OR -\n\nClick below to see previous jouneys"
+        android:textColor="@color/colorTextNormal"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/link_archived_journeys"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_below="@id/link_new_journey"
-            android:text="- OR -\n\nClick below to see previous jouneys"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/colorTextGrey"/>
+    <!-- intent(redirect) to 8.0.1(마이페이지) -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_previous_journey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/link_archived_journeys"
+        android:background="@drawable/blue_rounded_button_filled"
+        android:padding="12dp"
+        android:text="PREVIOUS JOURNEYS"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="193dp" />
 
-        <!-- intent(redirect) to 8.0.1(마이페이지) -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_previous_journey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:layout_below="@id/link_archived_journeys"
-            android:background="@drawable/blue_rounded_button_filled"
-            android:padding="12dp"
-            android:text="PREVIOUS JOURNEYS"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
