@@ -19,6 +19,7 @@
     <!-- 10/30(temp) 신지우 -->
     <color name = "colorBlue">#1882FF</color>
     <color name = "colorLSkyblue">#7A9CC4</color>
-    <color name = "colorTextGrey">#444444</color>
+    <color name = "colorTextNormal">#444444</color>
+    <color name = "colorTextLight">#6C6C6C</color>
 
 </resources>
