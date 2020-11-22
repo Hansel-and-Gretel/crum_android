@@ -24,6 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Path.MainJourneyActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
+        <activity android:name=".Path.CreateJourneyActivity">
+        </activity>
         <activity android:name=".Path.PathActivity" />
         <activity android:name=".Social.SocialActivity" />
         <activity android:name=".Places.PlacesActivity" />

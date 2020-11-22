@@ -128,9 +128,9 @@ public class PlacesDBControl{
         return cursor;
     }
 
-    public boolean edit(Places place, int placeID){
-
-    }
+//    public boolean edit(Places place, int placeID){
+//
+//    }
 
     // 시간으로 삭제할까.. id를 어떻게
     public void delete(String time) {

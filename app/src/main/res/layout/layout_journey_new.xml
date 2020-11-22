@@ -34,7 +34,7 @@
         android:layout_marginBottom="30dp">
 
         <EditText
-            android:id="@+id/new_journey_title"
+            android:id="@+id/input_journey_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="name"/>
@@ -55,7 +55,7 @@
         android:layout_height="50dp"
         android:spinnerMode="dropdown"
         android:hint="type"
-        style="@style/Widget.AppCompat.Spinner.Underlined" />
+        style="@style/Widget.AppCompat.Spinner.Underlined"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -104,6 +104,7 @@
             android:textAlignment="gravity"
             android:paddingStart="20dp"
             android:textColor="@color/colorTextNormal"
+            android:textSize="16sp"
             android:paddingLeft="20dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
