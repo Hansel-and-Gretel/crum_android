@@ -4,7 +4,7 @@
     <string name="Journey2"> Daily Life </string>
     <string name="Journey3"> Europe for 30 days</string>
 
-<!--    TYPES-->
+    <!--    TYPES-->
     <string-array name="journey_type">
         <item>(수정필요)</item>
         <item>Daily Life</item>
@@ -18,7 +18,7 @@
     </string-array>
 
 
-<!--    PARTY-->
+    <!--    PARTY-->
     <string-array name="journey_with">
         <item>(수정필요)</item>
         <item>Solo</item>
