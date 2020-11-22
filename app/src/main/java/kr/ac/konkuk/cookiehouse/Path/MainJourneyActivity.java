@@ -24,6 +24,10 @@ public class MainJourneyActivity extends AppCompatActivity {
     private static final String TAG = "MainJourneyActivity";
     private static final int ACTIVITY_NUM = 1;
     private static final String PREFS_NAME = "Journey_Status";     // Current journey info, one at a time
+
+
+    //이거 잇어야 하단nav바 작동해요
+    private Context mContext = MainJourneyActivity.this;
     // TODO 아래 load(), save() 함수의 preferences key 이름 여기에서 선언
 
     SharedPreferences appData;
@@ -32,9 +36,9 @@ public class MainJourneyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //loadJourney();
-        setContentView(R.layout.layout_journey_main);
+        setContentView(R.layout.activity_journey_main);
+        setupBottomNavigationView();
 
         Button currentJourneyBtn = findViewById(R.id.btn_current_journey);
         Button createJourneyBtn = findViewById(R.id.btn_start_new_journey);
@@ -45,7 +49,7 @@ public class MainJourneyActivity extends AppCompatActivity {
         createJourneyBtn.setOnClickListener(onClickListener);
         previousJourneyBtn.setOnClickListener(onClickListener);
 
-        //setupBottomNavigationView();
+
     }
 
 
@@ -54,10 +58,12 @@ public class MainJourneyActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btn_current_journey:
-
+//                    Intent intent = new Intent(MainJourneyActivity.this, CreateJourneyActivity.class);
+//                    startActivity(intent);
                     break;
                 case R.id.btn_start_new_journey:
                     Intent intent = new Intent(MainJourneyActivity.this, CreateJourneyActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.btn_previous_journey:
                     //???
@@ -135,7 +141,7 @@ public class MainJourneyActivity extends AppCompatActivity {
     private void setupBottomNavigationView(){
         Log.d(TAG,"SetupBottomNavigationView : setting up BottomNavigationView");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationView);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
