@@ -1,12 +1,10 @@
 package kr.ac.konkuk.cookiehouse.Path;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -14,43 +12,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.nio.file.Path;
-
-import kr.ac.konkuk.cookiehouse.Places.PlacesActivity;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
 
-public class PathActivity extends AppCompatActivity {
-    private static final String TAG = "PathActivity";
-    private static final int ACTIVITY_NUM=1;
-    private Context mContext = PathActivity.this;
+public class PathStartActivity extends AppCompatActivity {
 
-    Button startBtn;
+    private static final String TAG = "PathStartActivity";
+    private static final int ACTIVITY_NUM=1;
+    private Context mContext = PathStartActivity.this;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_journey_main);
+
+
+        setContentView(R.layout.activity_journey_new);
         Log.d(TAG, "onCreate : started");
         setupBottomNavigationView();
-
-
-        //ui init
-        startBtn = findViewById(R.id.btn_start_new_journey);
-
-
-
-        // start
-        startBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PathActivity.this, PathStartActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
 
     }
 
@@ -68,5 +46,9 @@ public class PathActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
