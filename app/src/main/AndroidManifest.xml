@@ -37,6 +37,9 @@
         <activity android:name=".MyPage.MyPageActivity" />
 
 
+        <activity android:name=".Path.PathStartActivity" />
+
+
 
 
 
