@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kr.ac.konkuk.cookiehouse">
-
     <!-- 10.30 인터넷 권한 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,37 +10,32 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-<!--        <meta-data-->
-<!--            android:name="com.google.android.actions"-->
-<!--            android:resource="@xml/actions" />-->
-
-        <activity android:name=".Home.MainActivity" >
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Path.RecordJourneyActivity"></activity>
+        <activity android:name=".General.StartActivity"></activity> <!-- <meta-data -->
+        <!-- android:name="com.google.android.actions" -->
+        <!-- android:resource="@xml/actions" /> -->
+        <activity android:name=".Home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Path.MainJourneyActivity" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-        <activity android:name=".Path.CreateJourneyActivity">
+        <activity android:name=".Path.MainJourneyActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".Path.CreateJourneyActivity"></activity>
         <activity android:name=".Path.PathActivity" />
         <activity android:name=".Social.SocialActivity" />
         <activity android:name=".Places.PlacesActivity" />
         <activity android:name=".MyPage.MyPageActivity" />
-
-
         <activity android:name=".Path.PathStartActivity" />
-
-
-
-
-
     </application>
 
 </manifest>
