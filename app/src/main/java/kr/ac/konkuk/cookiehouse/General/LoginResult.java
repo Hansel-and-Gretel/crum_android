@@ -19,4 +19,5 @@ public class LoginResult {
     public String getLifeStyle() {
         return lifeStyle;
     }
+
 }

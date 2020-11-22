@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 
 public interface RetrofitInterface {
 
-    @POST("/login")
+    @POST("/api/user/login")
     Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
 
     /*
@@ -25,7 +25,7 @@ public interface RetrofitInterface {
     Interceptor 는 크게 Applicaion 과 Network 로 나눌수 있다.
      */
 
-    @POST("/signup")
+    @POST("/api/user/register")
     Call<Void> executeSignup(@Body HashMap<String, String> map);
 
 }
