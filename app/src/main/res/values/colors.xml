@@ -3,4 +3,23 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+
+    <color name = "colorSkyblue" >#5AA2F8</color>
+    <color name="colorNavy">#0B409C</color>
+    <color name="colorLBluegray">#F2F5F8</color>
+    <color name="colorLMustard">#ECCE83</color>
+    <color name="colorMustard">#F3BE34</color>
+    <color name="colorDred">#CD3636</color>
+    <color name="colorLgray">#BCBCBC</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+
+    <!-- 10/30(temp) 신지우 -->
+    <color name = "colorBlue">#1882FF</color>
+    <color name = "colorLSkyblue">#7A9CC4</color>
+    <color name = "colorTextNormal">#444444</color>
+    <color name = "colorTextLight">#6C6C6C</color>
+
 </resources>

@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">cookiehouse</string>
+    <string name="app_name"> movie </string>
+    <string name="Journey1"> Europe for 30 days</string>
+    <string name="Journey2"> Daily Life </string>
+    <string name="Journey3"> Europe for 30 days</string>
+
+<!--    TYPES-->
+    <string-array name="journey_type">
+        <item>(수정필요)</item>
+        <item>Daily Life</item>
+        <item>Nature</item>
+        <item>Adventure</item>
+        <item>Relax</item>
+        <item>Sightseeing</item>
+        <item>Religious</item>
+        <item>Road Trip</item>
+        <item>etc.</item>
+    </string-array>
+
+
+<!--    PARTY-->
+    <string-array name="journey_with">
+        <item>(수정필요)</item>
+        <item>Solo</item>
+        <item>Family</item>
+        <item>Friends</item>
+        <item>Lover</item>
+        <item>Group</item>
+    </string-array>
+
 </resources>
