@@ -26,7 +26,7 @@ import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
 public class CreateJourneyActivity extends AppCompatActivity {
 
     private static final String TAG = "CreateJourneyActivity";
-    private static final int ACTIVITY_NUM = 1;
+//    private static final int ACTIVITY_NUM = 1;
 
 
     // TODO: freqency settings
@@ -51,7 +51,7 @@ public class CreateJourneyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_journey_new);
+        setContentView(R.layout.activity_journey_new);
 
         journeyName = findViewById(R.id.input_journey_name);
         journeyType = findViewById(R.id.input_journey_type);
@@ -137,13 +137,15 @@ public class CreateJourneyActivity extends AppCompatActivity {
     /*
      * Bottom Navigation view setup
      * */
-    private void setupBottomNavigationView(){
-        Log.d(TAG,"SetupBottomNavigationView : setting up BottomNavigationView");
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
+//    private void setupBottomNavigationView(){
+//        Log.d(TAG,"SetupBottomNavigationView : setting up BottomNavigationView");
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+//        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationView);
+//        Menu menu = bottomNavigationView.getMenu();
+//        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+//        menuItem.setChecked(true);
+//
+//    }
 
-    }
+
 }

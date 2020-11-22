@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kr.ac.konkuk.cookiehouse.MyPage.MyPageActivity;
+import kr.ac.konkuk.cookiehouse.Path.MainJourneyActivity;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Home.MainActivity;
 import kr.ac.konkuk.cookiehouse.Path.PathActivity;
@@ -38,7 +39,7 @@ public class BottomNavigationViewHelper {
                         break;
 
                     case R.id.path:
-                        Intent intent2 = new Intent(context, PathActivity.class); //ACTIVITY_NUM=1
+                        Intent intent2 = new Intent(context, MainJourneyActivity.class); //ACTIVITY_NUM=1
                         context.startActivity(intent2);
                         break;
 
