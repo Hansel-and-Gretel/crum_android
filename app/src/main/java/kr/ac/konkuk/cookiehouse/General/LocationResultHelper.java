@@ -35,12 +35,19 @@ public class LocationResultHelper {
     *
     * */
 
+
+    /* HERE YOU ARE */
+    // To. 다른 곳에서 db 쓸 일 있을 찬희에게
+    // 1. 이렇게 먼저 이 클래스 객체를 생성하고
     PlacesDBControl placesDB;
 
     public void insertPlacesInfo() {
+        // 2. 요기서 액티비티 context 꼭 넘겨주기!
         placesDB = new PlacesDBControl(mContext);
         Location location = mLocationList.get(0);
+        // 3. Places model(이건 나중에 내가 따로 옮겨놓을겝, 일단 냅둬주랍)
         Places place = new Places(0, null, location.getTime(), (float)location.getLongitude(), (float)location.getLatitude(), null, null, null, false);
+        // 4. DBControl 클래스에서 함수 맘대로 가져다 쓰면댕
         boolean checkDB = placesDB.insert(place);
         if(checkDB){
             Log.i("Saved to DB", String.valueOf(location.getTime()));
