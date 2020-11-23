@@ -1,18 +1,42 @@
 package kr.ac.konkuk.cookiehouse.models;
 
-public class ModelUser {
+import com.google.gson.annotations.SerializedName;
 
-    String email, name, password, image, token, lifeStyle, journeyStyle;
+
+public class ModelUser {
+    @SerializedName("userId")
+            int id;
+
+    @SerializedName("email")
+            String email;
+
+    @SerializedName("userName")
+            String userName;
+
+    @SerializedName("password")
+            String password;
+
+    @SerializedName("image")
+            String image;
+
+    @SerializedName("lifeStyle")
+            String lifeStyle;
+
+    @SerializedName("journeyStyle")
+            String journeyStyle;
+
+    // TODO 이거 로그인 시 호출되는 부분에 넣기
+    public static ModelUser USER;
 
     public ModelUser() {
     }
 
-    public ModelUser(String email, String name, String password, String image, String token, String lifeStyle, String journeyStyle) {
+    public ModelUser(int id, String email, String userName, String password, String image, String token, String lifeStyle, String journeyStyle) {
+        this.id = id;
         this.email = email;
-        this.name = name;
+        this.userName = userName;
         this.password = password;
         this.image = image;
-        this.token = token;
         this.lifeStyle = lifeStyle;
         this.journeyStyle = journeyStyle;
     }
@@ -25,12 +49,12 @@ public class ModelUser {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -49,17 +73,7 @@ public class ModelUser {
         this.image = image;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getLifeStyle() {
-        return lifeStyle;
-    }
+    public String getLifeStyle() { return lifeStyle; }
 
     public void setLifeStyle(String lifeStyle) {
         this.lifeStyle = lifeStyle;

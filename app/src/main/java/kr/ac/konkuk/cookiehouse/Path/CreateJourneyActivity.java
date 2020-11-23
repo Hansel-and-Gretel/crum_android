@@ -1,7 +1,9 @@
 package kr.ac.konkuk.cookiehouse.Path;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,20 +15,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import kr.ac.konkuk.cookiehouse.General.RetrofitConnection;
+import kr.ac.konkuk.cookiehouse.General.RetrofitInterface;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
+import kr.ac.konkuk.cookiehouse.models.ModelJourney;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.http.Body;
 
 public class CreateJourneyActivity extends AppCompatActivity {
 
     private static final String TAG = "CreateJourneyActivity";
-//    private static final int ACTIVITY_NUM = 1;
+    private static final String PREFS_NAME = "Journey_Status";
+    SharedPreferences appData;
+
+    RetrofitConnection retrofitConnection = new RetrofitConnection();
 
 
     // TODO: freqency settings
@@ -34,9 +50,6 @@ public class CreateJourneyActivity extends AppCompatActivity {
     public int frequencySetting = -1;
 
     // TODO: category list and accompany types
-    // for spinner.. (임시)
-//    private static final ArrayList<String> TYPES = new ArrayList<>();
-//    private static final ArrayList<String> PARTY = new ArrayList<>();
     ArrayAdapter<CharSequence> typesAdapter;
     ArrayAdapter<CharSequence> partyAdapter;
 
@@ -44,6 +57,13 @@ public class CreateJourneyActivity extends AppCompatActivity {
     Spinner journeyType;
     Spinner journeyWith;
     Button frequencyBtn;
+    Button createJourneyBtn;
+
+    ModelJourney modelJourney = new ModelJourney();
+    String name = "";
+    String type = null;
+    String party = "";
+    int frequency = -1;
 
 
 
@@ -52,37 +72,42 @@ public class CreateJourneyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_journey_new);
+        appData = getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
 
         journeyName = findViewById(R.id.input_journey_name);
         journeyType = findViewById(R.id.input_journey_type);
         journeyWith = findViewById(R.id.input_journey_with);
         frequencyBtn = findViewById(R.id.input_locate_frequency);
+        createJourneyBtn = findViewById(R.id.btn_start_new_journey);
 
-        SpinnerOnSelectedListener onSelectedListener = new SpinnerOnSelectedListener();
         BtnOnClickListener onClickListener = new BtnOnClickListener();
-        journeyType.setOnItemSelectedListener(onSelectedListener);
-        journeyWith.setOnItemSelectedListener(onSelectedListener);
         frequencyBtn.setOnClickListener(onClickListener);
 
         typesAdapter = ArrayAdapter.createFromResource(this, R.array.journey_type, R.layout.support_simple_spinner_dropdown_item);
         partyAdapter = ArrayAdapter.createFromResource(this, R.array.journey_with, R.layout.support_simple_spinner_dropdown_item);
         journeyType.setAdapter(typesAdapter);
         journeyWith.setAdapter(partyAdapter);
-    }
-
-    class SpinnerOnSelectedListener implements AdapterView.OnItemSelectedListener {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            switch (view.getId()) {
-                case R.id.input_journey_type:
-                    //category = categoryList.get(position).toString();
-                    break;
-                case R.id.input_journey_with:
-                    break;
+        journeyType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type = journeyType.getSelectedItem().toString();
+                Toast.makeText(CreateJourneyActivity.this, type, Toast.LENGTH_SHORT).show();
             }
-        }
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) { }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        journeyWith.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                party = journeyWith.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 
@@ -120,6 +145,9 @@ public class CreateJourneyActivity extends AppCompatActivity {
                             frequencyBtn.setText(frequencySetting + " min");
                             frequencyBtn.setTextSize(18);
                             frequencyDialog.dismiss();
+
+                            // model에 저장
+                            frequency = frequencySetting;
                         }
                     });
                     cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -134,18 +162,51 @@ public class CreateJourneyActivity extends AppCompatActivity {
         }
     }
 
-    /*
-     * Bottom Navigation view setup
-     * */
-//    private void setupBottomNavigationView(){
-//        Log.d(TAG,"SetupBottomNavigationView : setting up BottomNavigationView");
-//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-//        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationView);
-//        Menu menu = bottomNavigationView.getMenu();
-//        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-//        menuItem.setChecked(true);
-//
-//    }
+     //새로운 Journey 저장
+    public void saveJourney(View view) {        // 지금은 카테고리만 저장하는 역할(설정값 저장할게 이것 밖에없음 아직), 나중에 알림기능이나, 통계 on/off 블라블라
+        name = journeyName.getText().toString();
+        if(name.isEmpty() || type.isEmpty() || party.isEmpty() || frequency <= 0){
+            // 하나라도 입력X
+            Log.i("이거", name+" "+type+" "+frequency);
+            Toast.makeText(CreateJourneyActivity.this, "Fill out all the forms", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            JSONObject request = modelJourney.transferNewJourney(name, type, party, frequency);
+            SharedPreferences.Editor editor = appData.edit();       // SharedPreferences (설정 저장용 파일) 열기
+            editor.putBoolean(PREFS_NAME, true);
+
+            editor.putString("Journey_Name", name);
+            editor.putString("Journey_Type", type);
+            editor.putString("Journey_Party", party);
+            editor.putInt("Journey_Frequency", frequency);
+
+            editor.apply();
+
+
+            Call<ModelJourney> call = retrofitConnection.server.createJourney(request);
+            Log.i("뭔가", request.toString());
+
+            call.enqueue(new Callback<ModelJourney>() {
+                @Override
+                public void onResponse(Call<ModelJourney> call, Response<ModelJourney> response) {
+                    if(response.code() == 200){
+                        Toast.makeText(CreateJourneyActivity.this, "Journey Created", Toast.LENGTH_SHORT).show();
+                    } else if(response.code() == 400) {
+                        Toast.makeText(CreateJourneyActivity.this, "Journey creation failed", Toast.LENGTH_LONG).show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ModelJourney> call, Throwable t) {
+                    Toast.makeText(CreateJourneyActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
+    }
+
 
 
 }
