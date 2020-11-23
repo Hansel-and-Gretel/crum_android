@@ -58,8 +58,9 @@ public class MainJourneyActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btn_current_journey:
-//                    Intent intent = new Intent(MainJourneyActivity.this, CreateJourneyActivity.class);
-//                    startActivity(intent);
+                    Intent intent_record = new Intent(MainJourneyActivity.this, RecordJourneyActivity.class);
+//                    intent_record.putExtra();
+                    startActivity(intent_record);
                     break;
                 case R.id.btn_start_new_journey:
                     Intent intent = new Intent(MainJourneyActivity.this, CreateJourneyActivity.class);

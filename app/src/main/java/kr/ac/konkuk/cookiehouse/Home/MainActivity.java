@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         TextView usernameView = findViewById(R.id.username);
-        String username = intent.getExtras().getString("username");
-        usernameView.setText(username);
+//        String username = intent.getExtras().getString("username");
+//        usernameView.setText(username);
 
 
     }
