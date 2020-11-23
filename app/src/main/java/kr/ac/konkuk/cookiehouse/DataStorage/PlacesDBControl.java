@@ -15,7 +15,6 @@ import java.net.URLConnection;
 import kr.ac.konkuk.cookiehouse.BuildConfig;
 
 public class PlacesDBControl{
-    private final String SERVER_ADDRESS = "http://34.64.192.218/journey.db";
     public final String PACKAGE_NAME = BuildConfig.APPLICATION_ID;  // 서비스명 바뀔 수도 있어서..
 
     // DB 파일 받기 위한
@@ -37,6 +36,7 @@ public class PlacesDBControl{
         this.context = context;
         helper = new PlacesDBHelper(context);
         placesDB = context.openOrCreateDatabase(helper.PLACES_DATABASE_NAME, Context.MODE_PRIVATE, null);
+        placesDB = helper.getWritableDatabase();
         // TODO: db 저장경로 다른 곳으로 하고싶으면 사용하삼
         // final String DB_ADDRESS = Environment.getDataDirectory().getAbsolutePath() +"/data/"+ PACKAGE_NAME + "/databases/places.db";
     }
@@ -95,7 +95,7 @@ public class PlacesDBControl{
 
         // TODO 이ㅓㅀ게 하면 fk는 어떻게 할거지? 할 필요 없나? (나중에 서버로 업로드해주는 곳에서 fk 붙여서 나갈거야)
         if(placesDB.insert(helper.TABLE_NAME, null, values) > 0){
-            Log.i("places.db - Inserted", place.name);
+            Log.i("places.db - Inserted", String.valueOf(place.time));
             return true;
         } else {
             return  false;

@@ -1,15 +1,23 @@
 package kr.ac.konkuk.cookiehouse.General;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
+import kr.ac.konkuk.cookiehouse.models.ModelJourney;
+import kr.ac.konkuk.cookiehouse.models.ModelUser;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RetrofitInterface {
 
-    @POST("/login")
-    Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
+    @POST("/api/user/login")
+    Call<ModelUser> executeLogin(@Body HashMap<String, String> map);
+
+    @GET("/api/user/auth")
+    Call<ModelUser> getUserInfo();
 
     /*
     * Call<객체타입>
@@ -25,7 +33,9 @@ public interface RetrofitInterface {
     Interceptor 는 크게 Applicaion 과 Network 로 나눌수 있다.
      */
 
-    @POST("/signup")
+    @POST("/api/user/signup")
     Call<Void> executeSignup(@Body HashMap<String, String> map);
 
+    @POST("/api/journey/upload")
+    Call<ModelJourney> createJourney(@Body JSONObject newJourney);
 }

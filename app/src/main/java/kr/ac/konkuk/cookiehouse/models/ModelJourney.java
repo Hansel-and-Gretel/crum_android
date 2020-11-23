@@ -1,31 +1,83 @@
 package kr.ac.konkuk.cookiehouse.models;
 
-public class ModelJourney {
+import com.google.gson.annotations.SerializedName;
 
-    String journeyName, type, accompany, summary, image;
-    int pinFrequency;
-    boolean status, sharedFlag;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static kr.ac.konkuk.cookiehouse.models.ModelUser.USER;
+
+public class ModelJourney {
+    public static ModelJourney currentJourney = null;
+
+//    @SerializedName("")
+//    public int id;                //PK
+//
+//    @SerializedName("")
+//    public int path;      // current path, path ID
+
+    @SerializedName("journeyName")
+    public String name;           // journeyNmae (서버)
+
+    @SerializedName("type")
+    public String type;
+
+    @SerializedName("accompany")
+    public String party;          // accompany (서버)
+
+    @SerializedName("pinFrequency")
+    public int frequency;         // pinFrequency(서버)
+
+    @SerializedName("summary")
+    public String summary;           // journeyNmae (서버)
+
+    @SerializedName("image")
+    public String image;
+    @SerializedName("status")
+    public boolean status;            // [GUIDE] true: active / false: paused, stopped etc.
+    @SerializedName("sharedFlag")
+    public boolean shared;
 
     public ModelJourney() {
     }
 
-    public ModelJourney(String journeyName, String type, String accompany, String summary, String image, int pinFrequency, boolean status, boolean sharedFlag) {
-        this.journeyName = journeyName;
+
+
+    public ModelJourney(String name, String type, String party, int frequency, String summary, String image, boolean status, boolean shared) {
+        // 서버 자동생성: this.id = id;
+        //아직this.path = path;
+        this.name = name;
         this.type = type;
-        this.accompany = accompany;
+        this.party = party;
+        this.frequency = frequency;
         this.summary = summary;
         this.image = image;
-        this.pinFrequency = pinFrequency;
         this.status = status;
-        this.sharedFlag = sharedFlag;
+        this.shared = shared;
     }
 
-    public String getJourneyName() {
-        return journeyName;
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public int getPath() {
+//        return path;
+//    }
+//
+//    public void setPath(int path) {
+//        this.path = path;
+//    }
+
+    public String getName() {
+        return name;
     }
 
-    public void setJourneyName(String journeyName) {
-        this.journeyName = journeyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {
@@ -36,12 +88,20 @@ public class ModelJourney {
         this.type = type;
     }
 
-    public String getAccompany() {
-        return accompany;
+    public String getParty() {
+        return party;
     }
 
-    public void setAccompany(String accompany) {
-        this.accompany = accompany;
+    public void setParty(String party) {
+        this.party = party;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
     }
 
     public String getSummary() {
@@ -60,14 +120,6 @@ public class ModelJourney {
         this.image = image;
     }
 
-    public int getPinFrequency() {
-        return pinFrequency;
-    }
-
-    public void setPinFrequency(int pinFrequency) {
-        this.pinFrequency = pinFrequency;
-    }
-
     public boolean isStatus() {
         return status;
     }
@@ -76,11 +128,32 @@ public class ModelJourney {
         this.status = status;
     }
 
-    public boolean isSharedFlag() {
-        return sharedFlag;
+    public boolean isShared() {
+        return shared;
     }
 
-    public void setSharedFlag(boolean sharedFlag) {
-        this.sharedFlag = sharedFlag;
+    public void setShared(boolean shared) {
+        this.shared = shared;
     }
+
+    JSONObject requestJourney = new JSONObject();
+    public JSONObject transferNewJourney(String name, String type, String party, int frequency){
+        try {
+            requestJourney.put("journeyName", name);
+            requestJourney.put("type", type);
+            requestJourney.put("accompany", party);
+            requestJourney.put("pinFrequency", frequency);
+            requestJourney.put("status", false);
+            requestJourney.put("sharedFlag", false);
+            //requestJourney.put("userName", USER.getUserName());
+            // TODO
+            requestJourney.put("userName", "test99");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return requestJourney;
+    }
+
+
 }
