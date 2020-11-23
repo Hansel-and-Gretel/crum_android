@@ -3,6 +3,7 @@ package kr.ac.konkuk.cookiehouse.DataStorage;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class PlacesDBHelper extends SQLiteOpenHelper {
 
@@ -23,19 +24,35 @@ public class PlacesDBHelper extends SQLiteOpenHelper {
 
     public PlacesDBHelper(Context context) {super(context, PLACES_DATABASE_NAME, null, DATABASE_VERSION);}
 
+//    @Override
+//    public void onCreate(SQLiteDatabase db) {
+//        db.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +" (" +
+//                PLACE_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                PLACE_NAME + " TEXT, " +
+//                PLACE_TIME + " INTEGER," +
+//                PLACE_LONGITUDE + " REAL," +
+//                PLACE_LATITUDE+ " REAL, " +
+//                PLACE_PHOTO + " TEXT, " +
+//                PLACE_NOTE + " TEXT, " +
+//                PLACE_CATEGORY + " TEXT, " +
+//                PLACE_FLAG + " INTEGER, " +
+//                "FOREIGN KEY(" + PLACE_ID + ") REFERENCES journeys(path_id))");
+//    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.i("데이터베이스 생성", "places.db");
         db.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +" (" +
                 PLACE_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 PLACE_NAME + " TEXT, " +
-                PLACE_TIME + " INTEGER, " +
+                PLACE_TIME + " INTEGER," +
                 PLACE_LONGITUDE + " INTEGER," +
                 PLACE_LATITUDE+ " INTEGER, " +
                 PLACE_PHOTO + " TEXT, " +
                 PLACE_NOTE + " TEXT, " +
                 PLACE_CATEGORY + " TEXT, " +
-                PLACE_FLAG + " INTEGER, " +
-                "FOREIGN KEY(" + PLACE_ID + ") REFERENCES journeys(path_id))");
+                PLACE_FLAG + " INTEGER)");
+               // "FOREIGN KEY(" + PLACE_ID + ") REFERENCES journeys(path_id))");
     }
 
     @Override

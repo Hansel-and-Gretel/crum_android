@@ -36,9 +36,13 @@
         </activity>
         <activity android:name=".Path.MainJourneyActivity">
         </activity>
-        <activity android:name=".General.LoginActivity" />
+<!--        <activity android:name=".General.LoginActivity" />-->
         <activity android:name=".General.SignupActivity"/>
-        <activity android:name=".Path.RecordJourneyActivity"/>
+        <activity android:name=".Path.RecordJourneyActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".Path.CreateJourneyActivity"/>
         <activity android:name=".Path.PathActivity" />
         <activity android:name=".Social.SocialActivity" />
