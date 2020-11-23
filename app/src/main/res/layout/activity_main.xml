@@ -27,7 +27,13 @@
             android:layout_below="@+id/relLayout1">
             <include layout="@layout/layout_center_viewpager"/>
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/username"
+                android:text="username is here"
+                android:textSize="30sp"
+                />
 
         </RelativeLayout>
 
