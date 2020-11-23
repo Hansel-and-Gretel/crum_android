@@ -7,9 +7,9 @@ import android.os.Parcelable;
 public class Places implements Parcelable {     // 시스템 위한 구조체
     public final int id;              //PK
     public final String name;
-    public final int time;      //TODO: data type - Date? or int?
-    public final int longitude;
-    public final int latitude;
+    public final long time;      //TODO: data type - Date? or int?
+    public final float longitude;
+    public final float latitude;
     public final String photo;
     public final String note;
     public final String category;
@@ -17,7 +17,7 @@ public class Places implements Parcelable {     // 시스템 위한 구조체
 
 
     // Places 구조체 객체 만들 때 사용
-    public Places(int id, String name, int time, int longitude, int latitude, String photo, String note, String category, boolean status){
+    public Places(int id, String name, long time, float longitude, float latitude, String photo, String note, String category, boolean status){
         this.id = id;
         this.name = name;
         this.time = time;
@@ -34,8 +34,8 @@ public class Places implements Parcelable {     // 시스템 위한 구조체
         id = src.readInt();
         name = src.readString();
         time = src.readInt();
-        longitude = src.readInt();
-        latitude = src.readInt();
+        longitude = src.readFloat();
+        latitude = src.readFloat();
         photo = src.readString();
         note = src.readString();
         category = src.readString();
@@ -51,9 +51,9 @@ public class Places implements Parcelable {     // 시스템 위한 구조체
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeString(this.name);
-        dest.writeInt(this.time);
-        dest.writeInt(this.longitude);
-        dest.writeInt(this.latitude);
+        dest.writeLong(this.time);
+        dest.writeFloat(this.longitude);
+        dest.writeFloat(this.latitude);
         dest.writeString(this.photo);
         dest.writeString(this.note);
         dest.writeString(this.category);

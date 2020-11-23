@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
@@ -14,6 +15,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
+import kr.ac.konkuk.cookiehouse.DataStorage.Places;
+import kr.ac.konkuk.cookiehouse.DataStorage.PlacesDBControl;
 import kr.ac.konkuk.cookiehouse.Path.RecordJourneyActivity;
 import kr.ac.konkuk.cookiehouse.R;
 
@@ -31,6 +34,20 @@ public class LocationResultHelper {
     * location.getLongitude()
     *
     * */
+
+    PlacesDBControl placesDB;
+
+    public void insertPlacesInfo() {
+        placesDB = new PlacesDBControl(mContext);
+        Location location = mLocationList.get(0);
+        Places place = new Places(0, null, location.getTime(), (float)location.getLongitude(), (float)location.getLatitude(), null, null, null, false);
+        boolean checkDB = placesDB.insert(place);
+        if(checkDB){
+            Log.i("Saved to DB", String.valueOf(location.getTime()));
+        } else {
+            Log.i("DB 저장 실패", String.valueOf(location.getTime()));
+        }
+    }
 
 
     public static final String KEY_LOCATION_RESULTS = "key-location-results";
@@ -115,6 +132,7 @@ public class LocationResultHelper {
                 .putString(KEY_LOCATION_RESULTS, getLocationResultTitle() + "\n" +
                         getLocationResultText())
                 .apply();
+        insertPlacesInfo();
     }
 
 
@@ -124,5 +142,8 @@ public class LocationResultHelper {
                 .getString(KEY_LOCATION_RESULTS, "default value");
 
     }
+
+
+
 
 }
