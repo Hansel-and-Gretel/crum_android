@@ -26,7 +26,7 @@ public class PathStartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_journey_new);
+        //setContentView(R.layout.activity_journey_new);
         Log.d(TAG, "onCreate : started");
         setupBottomNavigationView();
 

@@ -4,7 +4,7 @@
     <string name="Journey2"> Daily Life </string>
     <string name="Journey3"> Europe for 30 days</string>
 
-<!--    TYPES-->
+    <!--    TYPES-->
     <string-array name="journey_type">
         <item>(수정필요)</item>
         <item>Daily Life</item>
@@ -18,7 +18,7 @@
     </string-array>
 
 
-<!--    PARTY-->
+    <!--    PARTY-->
     <string-array name="journey_with">
         <item>(수정필요)</item>
         <item>Solo</item>
@@ -27,5 +27,17 @@
         <item>Lover</item>
         <item>Group</item>
     </string-array>
+
+
+
+    <!--location-->
+    <string name="action_settings">Settings</string>
+    <string name="google_maps_api_key">AIzaSyAug4IHTjqntXBOr57VClK_XEiwvqkAf-g</string>
+
+    <plurals name="num_locations_reported">
+        <item quantity="zero">No location reported</item>
+        <item quantity="one">One location reported</item>
+        <item quantity="other">%d locations reported</item>
+    </plurals>
 
 </resources>
