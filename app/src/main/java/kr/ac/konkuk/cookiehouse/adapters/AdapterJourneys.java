@@ -1,6 +1,7 @@
 package kr.ac.konkuk.cookiehouse.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.ac.konkuk.cookiehouse.R;
+import kr.ac.konkuk.cookiehouse.Social.JourneyDetailActivity;
 import kr.ac.konkuk.cookiehouse.models.ModelJourney;
 import retrofit2.Callback;
 
@@ -69,6 +71,7 @@ public class AdapterJourneys extends RecyclerView.Adapter<AdapterJourneys.MyHold
         String jName = journeyList.get(i).getName();
         String jType = journeyList.get(i).getType();
         String jImage = journeyList.get(i).getImage();
+        int jId = journeyList.get(i).getId();
 
         myHolder.uNameTv.setText(uName);
         myHolder.jTitleTv.setText(jName);
@@ -80,6 +83,17 @@ public class AdapterJourneys extends RecyclerView.Adapter<AdapterJourneys.MyHold
         }catch (Exception e){
 
         }
+
+        //이미지 누르면 (각 아이템 누르면)
+        myHolder.jImageIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //이미지 선택하면 각 저니 상세페이지
+                Intent intent = new Intent(context, JourneyDetailActivity.class);
+                intent.putExtra("journeyId",jId);
+                context.startActivity(intent);
+            }
+        });
 
 
 

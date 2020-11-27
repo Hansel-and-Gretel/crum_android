@@ -13,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 /*
  * Call<객체타입>
@@ -45,6 +46,9 @@ public interface RetrofitInterface {
 
     @GET("/api/journey/main")
     Call<List<ModelJourney>> getJourney();
+
+    @GET("/api/journey/detail/{id}")
+    Call<ModelJourney> getOneJourney(@Query("id") int id_journey);
 
 
 }
