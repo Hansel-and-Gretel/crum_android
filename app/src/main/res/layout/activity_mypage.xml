@@ -23,6 +23,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/usernameTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Username"
@@ -40,6 +41,7 @@
                     android:layout_marginTop="5dp">
 
                     <TextView
+                        android:id="@+id/followerTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -56,6 +58,7 @@
                         android:background="#F5F5F0"/>
 
                     <TextView
+                        android:id="@+id/followingTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -98,6 +101,7 @@
                         android:layout_weight="1">
 
                         <TextView
+
                             android:textSize="12sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -105,9 +109,9 @@
                             android:textColor="@color/white"
                             android:text="JourneyType"
                             android:layout_marginRight="10dp"
-                            android:layout_toStartOf="@+id/journey_section"/>
+                            android:layout_toStartOf="@+id/journeyType"/>
                         <TextView
-                            android:id="@+id/journey_section"
+                            android:id="@+id/journeyType"
                             android:textSize="10sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -139,6 +143,7 @@
                             android:layout_marginLeft="10dp"
                             />
                         <TextView
+                            android:id="@+id/lifeStyle"
                             android:textSize="10sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -160,7 +165,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginTop="10dp">
 
                 <Button
                     android:layout_width="wrap_content"
@@ -211,5 +219,6 @@
 
     </ScrollView>
 
+    <include layout="@layout/bottom_nav"></include>
 
 </RelativeLayout>

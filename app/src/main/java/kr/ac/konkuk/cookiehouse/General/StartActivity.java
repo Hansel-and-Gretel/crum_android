@@ -83,7 +83,7 @@ public class StartActivity extends AppCompatActivity {
                             USER = loginResponse.body();    // store user info into model
                             Log.i("USER_ID", String.valueOf(USER.getId()));
                             // TODO 지워야대 --> 테스트용
-                            Intent intent = new Intent(StartActivity.this, CreateJourneyActivity.class);
+                            Intent intent = new Intent(StartActivity.this, MainActivity.class);
                             startActivity(intent);
 
                         }else if(loginResponse.code() == 400){

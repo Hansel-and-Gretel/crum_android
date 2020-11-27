@@ -22,8 +22,8 @@ public class ModelUser {
     @SerializedName("lifeStyle")
             String lifeStyle;
 
-    @SerializedName("journeyStyle")
-            String journeyStyle;
+    @SerializedName("journeyType")
+            String journeyType;
 
     // 유일하게 존재 --> 현재 사용자의 account info
     public static ModelUser USER;
@@ -31,14 +31,14 @@ public class ModelUser {
     public ModelUser() {
     }
 
-    public ModelUser(int id, String email, String userName, String password, String image, String token, String lifeStyle, String journeyStyle) {
+    public ModelUser(int id, String email, String userName, String password, String image, String token, String lifeStyle, String journeyType) {
         this.id = id;
         this.email = email;
         this.userName = userName;
         this.password = password;
         this.image = image;
         this.lifeStyle = lifeStyle;
-        this.journeyStyle = journeyStyle;
+        this.journeyType= journeyType;
     }
 
     public String getEmail() {
@@ -79,12 +79,12 @@ public class ModelUser {
         this.lifeStyle = lifeStyle;
     }
 
-    public String getJourneyStyle() {
-        return journeyStyle;
+    public String getjourneyType() {
+        return journeyType;
     }
 
-    public void setJourneyStyle(String journeyStyle) {
-        this.journeyStyle = journeyStyle;
+    public void setjourneyType(String journeyType) {
+        this.journeyType = journeyType;
     }
 
     public int getId() {
