@@ -27,7 +27,10 @@ import static kr.ac.konkuk.cookiehouse.models.ModelUser.USER;
 
 public class StartActivity extends AppCompatActivity {
 //11.22
+
     RetrofitConnection retrofitConnection = new RetrofitConnection();
+    RetrofitInterface retrofitInterface = RetrofitConnection.getApiClient().create(RetrofitInterface.class);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,8 @@ public class StartActivity extends AppCompatActivity {
 
     private void handleLoginDialog() {
 
+
+
         View view = getLayoutInflater().inflate(R.layout.activity_login, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -71,7 +76,7 @@ public class StartActivity extends AppCompatActivity {
                 map.put("email", emailEdit.getText().toString());
                 map.put("password", passwordEdit.getText().toString());
 
-                Call<ModelUser> userLoginCall = retrofitConnection.server.executeLogin(map);
+                Call<ModelUser> userLoginCall = retrofitInterface.executeLogin(map);
 
                 //콜백
                 userLoginCall.enqueue(new Callback<ModelUser>() {
@@ -137,7 +142,7 @@ public class StartActivity extends AppCompatActivity {
 
 
                 //Call<Void> call = retrofitInterface.executeSignup(map);
-                Call<Void> call = retrofitConnection.server.executeSignup(map);
+                Call<Void> call = retrofitInterface.executeSignup(map);
 
                 call.enqueue(new Callback<Void>() {
                     @Override

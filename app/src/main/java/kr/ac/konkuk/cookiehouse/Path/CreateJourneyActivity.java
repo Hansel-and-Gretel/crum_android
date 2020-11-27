@@ -43,6 +43,7 @@ public class CreateJourneyActivity extends AppCompatActivity {
     SharedPreferences appData;
 
     RetrofitConnection retrofitConnection = new RetrofitConnection();
+    RetrofitInterface retrofitInterface = RetrofitConnection.getApiClient().create(RetrofitInterface.class);
 
 
     // TODO: freqency settings
@@ -183,7 +184,7 @@ public class CreateJourneyActivity extends AppCompatActivity {
             editor.apply();
 
 
-            Call<ModelJourney> call = retrofitConnection.server.createJourney(request);
+            Call<ModelJourney> call = retrofitInterface.createJourney(request);
             Log.i("뭔가", request.toString());
 
             call.enqueue(new Callback<ModelJourney>() {

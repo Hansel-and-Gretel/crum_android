@@ -2,7 +2,10 @@ package kr.ac.konkuk.cookiehouse.General;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import kr.ac.konkuk.cookiehouse.models.ModelJourney;
 import kr.ac.konkuk.cookiehouse.models.ModelUser;
@@ -10,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 /*
  * Call<객체타입>
  *
@@ -38,5 +42,9 @@ public interface RetrofitInterface {
 
     @POST("/api/journey/upload")
     Call<ModelJourney> createJourney(@Body JSONObject newJourney);
+
+    @GET("/api/journey/main")
+    Call<List<ModelJourney>> getJourney();
+
 
 }

@@ -1,6 +1,7 @@
 package kr.ac.konkuk.cookiehouse.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,13 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.models.ModelJourney;
-
+import retrofit2.Callback;
 
 
 public class AdapterJourneys extends RecyclerView.Adapter<AdapterJourneys.MyHolder> {
@@ -26,7 +29,7 @@ public class AdapterJourneys extends RecyclerView.Adapter<AdapterJourneys.MyHold
     Context context;
     List<ModelJourney> journeyList;
 
-    public AdapterJourneys(Context context, List<ModelJourney> journeyList){
+    public AdapterJourneys(Context context, List<ModelJourney> journeyList) {
         this.context = context;
         this.journeyList = journeyList;
     }
@@ -55,20 +58,20 @@ public class AdapterJourneys extends RecyclerView.Adapter<AdapterJourneys.MyHold
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_journey, parent, false);
 
-        return null;
+        return new MyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
 
         // get data
-//        String uName = 작성한 사람?
+        String uName = journeyList.get(i).getUserName();
         String jName = journeyList.get(i).getName();
         String jType = journeyList.get(i).getType();
         String jImage = journeyList.get(i).getImage();
 
-        myHolder.uNameTv.setText("작성자명");
-        myHolder.jTitleTv.setText(jType);
+        myHolder.uNameTv.setText(uName);
+        myHolder.jTitleTv.setText(jName);
         myHolder.jTypeTv.setText(jType);
 
         //포스트 이미지 설정
@@ -84,7 +87,24 @@ public class AdapterJourneys extends RecyclerView.Adapter<AdapterJourneys.MyHold
 
     @Override
     public int getItemCount() {
+        Log.d("tAG", "getItemCount: 아이템 개수" + journeyList.size());
         return journeyList.size();
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public List<ModelJourney> getJourneyList() {
+        return journeyList;
+    }
+
+    public void setJourneyList(List<ModelJourney> journeyList) {
+        this.journeyList = journeyList;
     }
 
 

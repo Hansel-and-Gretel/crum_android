@@ -12,12 +12,50 @@ import retrofit2.converter.gson.GsonConverterFactory;
 ////    private String PG_URL ="http://10.0.2.2:5000";
 
 public class RetrofitConnection {
-    public String BASE_URL = "https://sweetrail.ml";
-    Retrofit retrofit =new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    public static final String BASE_URL = "https://sweetrail.ml";
+    public static Retrofit retrofit;
 
-    public RetrofitInterface server = retrofit.create(RetrofitInterface.class);
+//    retrofit =new Retrofit.Builder()
+//            .baseUrl(BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build();
+
+//    public RetrofitInterface server = retrofit.create(RetrofitInterface.class);
+
+    public static Retrofit getApiClient() {
+        if (retrofit == null) {
+
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+
+        }
+
+        return retrofit;
+
+    }
 }
+
+
+
+/*chanhee 11-28*/
+//public class RetrofitConnection {
+//    public String BASE_URL = "https://sweetrail.ml";
+//    public static Retrofit retrofit;
+//
+//    if(retrofit==null){
+//
+//        retrofit =new Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//
+//    }
+//
+//    return retrofit;
+//
+//}
 

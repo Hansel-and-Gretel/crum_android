@@ -10,8 +10,8 @@ import static kr.ac.konkuk.cookiehouse.models.ModelUser.USER;
 public class ModelJourney {
     public static ModelJourney currentJourney = null;
 
-//    @SerializedName("")
-//    public int id;                //PK
+    @SerializedName("id")
+    public int id;                //PK
 //
 //    @SerializedName("")
 //    public int path;      // current path, path ID
@@ -33,19 +33,25 @@ public class ModelJourney {
 
     @SerializedName("image")
     public String image;
+
     @SerializedName("status")
     public boolean status;            // [GUIDE] true: active / false: paused, stopped etc.
+
     @SerializedName("sharedFlag")
     public boolean shared;
+
+    @SerializedName("userId")
+    public String userId;
+
+    @SerializedName("userName")
+    public String userName;
+
 
     public ModelJourney() {
     }
 
-
-
-    public ModelJourney(String name, String type, String party, int frequency, String summary, String image, boolean status, boolean shared) {
-        // 서버 자동생성: this.id = id;
-        //아직this.path = path;
+    public ModelJourney(int id, String name, String type, String party, int frequency, String summary, String image, boolean status, boolean shared, String userId, String userName) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.party = party;
@@ -54,23 +60,34 @@ public class ModelJourney {
         this.image = image;
         this.status = status;
         this.shared = shared;
+        this.userId = userId;
+        this.userName = userName;
     }
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public int getPath() {
-//        return path;
-//    }
-//
-//    public void setPath(int path) {
-//        this.path = path;
-//    }
+    public static ModelJourney getCurrentJourney() {
+        return currentJourney;
+    }
+
+    public static void setCurrentJourney(ModelJourney currentJourney) {
+        ModelJourney.currentJourney = currentJourney;
+    }
+
+    public JSONObject getRequestJourney() {
+        return requestJourney;
+    }
+
+    public void setRequestJourney(JSONObject requestJourney) {
+        this.requestJourney = requestJourney;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -134,6 +151,22 @@ public class ModelJourney {
 
     public void setShared(boolean shared) {
         this.shared = shared;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     // 서버에게 보낼 메세지 ㅠㅐ요
