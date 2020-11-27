@@ -194,6 +194,7 @@ public class CreateJourneyActivity extends AppCompatActivity {
                     } else if(response.code() == 400) {
                         Toast.makeText(CreateJourneyActivity.this, "Journey creation failed", Toast.LENGTH_LONG).show();
 
+
                     }
                 }
 
