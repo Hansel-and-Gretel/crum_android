@@ -143,9 +143,9 @@ public class StartActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
 
-                        if(response.code() == 200){
+                        if(response.code() != 500){
                             Toast.makeText(StartActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                        }else if (response.code() == 400) {
+                        }else if (response.code() == 500) {
                             Toast.makeText(StartActivity.this, "이미 가입되어 있습니다.", Toast.LENGTH_SHORT).show();
                         }
 
