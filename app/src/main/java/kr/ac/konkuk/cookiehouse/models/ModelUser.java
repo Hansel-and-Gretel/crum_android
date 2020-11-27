@@ -25,7 +25,7 @@ public class ModelUser {
     @SerializedName("journeyStyle")
             String journeyStyle;
 
-    // TODO 이거 로그인 시 호출되는 부분에 넣기
+    // 유일하게 존재 --> 현재 사용자의 account info
     public static ModelUser USER;
 
     public ModelUser() {
@@ -85,5 +85,13 @@ public class ModelUser {
 
     public void setJourneyStyle(String journeyStyle) {
         this.journeyStyle = journeyStyle;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

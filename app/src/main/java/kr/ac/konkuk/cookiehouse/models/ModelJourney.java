@@ -136,6 +136,7 @@ public class ModelJourney {
         this.shared = shared;
     }
 
+    // 서버에게 보낼 메세지 ㅠㅐ요
     JSONObject requestJourney = new JSONObject();
     public JSONObject transferNewJourney(String name, String type, String party, int frequency){
         try {
@@ -145,9 +146,9 @@ public class ModelJourney {
             requestJourney.put("pinFrequency", frequency);
             requestJourney.put("status", false);
             requestJourney.put("sharedFlag", false);
-            //requestJourney.put("userName", USER.getUserName());
-            // TODO
-            requestJourney.put("userName", "test99");
+            // 로그인에서 받아온 정보
+            requestJourney.put("userId", USER.id);
+            requestJourney.put("userName", USER.userName);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -25,6 +25,10 @@
 
         <activity android:name=".General.StartActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity> <!-- <meta-data -->
         <!-- android:name="com.google.android.actions" -->
         <!-- android:resource="@xml/actions" /> -->
@@ -43,7 +47,9 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter></activity>
-        <activity android:name=".Path.CreateJourneyActivity"/>
+        <activity android:name=".Path.CreateJourneyActivity">
+
+        </activity>
         <activity android:name=".Path.PathActivity" />
         <activity android:name=".Social.SocialActivity" />
         <activity android:name=".Places.PlacesActivity" />
