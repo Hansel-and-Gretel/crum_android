@@ -24,25 +24,22 @@
 
 
         <activity android:name=".General.StartActivity">
-
-        </activity> <!-- <meta-data -->
-        <!-- android:name="com.google.android.actions" -->
-        <!-- android:resource="@xml/actions" /> -->
-        <activity android:name=".Home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity> <!-- <meta-data -->
+        <!-- android:name="com.google.android.actions" -->
+        <!-- android:resource="@xml/actions" /> -->
+        <activity android:name=".Home.MainActivity">
+
         </activity>
         <activity android:name=".Path.MainJourneyActivity">
         </activity>
 <!--        <activity android:name=".General.LoginActivity" />-->
         <activity android:name=".General.SignupActivity"/>
         <activity android:name=".Path.RecordJourneyActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        </activity>
         <activity android:name=".Path.CreateJourneyActivity"/>
         <activity android:name=".Path.PathActivity" />
         <activity android:name=".Social.SocialActivity" />
