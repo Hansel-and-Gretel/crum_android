@@ -16,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
+
+import static android.content.ContentValues.TAG;
 import static kr.ac.konkuk.cookiehouse.models.ModelUser.USER;
 
 
@@ -27,6 +29,7 @@ public class MyPageActivity extends AppCompatActivity {
 
     RecyclerView recyclerView_public, recyclerView_private;
     TextView usernameTv, followerTv, followingTv, journeyTv, lifeTv;
+    String username, follower, following, journeyType, lifeStyle;
     ImageView avatarIv;
 
 
@@ -49,15 +52,23 @@ public class MyPageActivity extends AppCompatActivity {
         journeyTv = findViewById(R.id.journeyType);
         lifeTv = findViewById(R.id.lifeStyle);
 
-        usernameTv.setText(USER.getUserName());
-        journeyTv.setText(USER.getjourneyType());
-        lifeTv.setText(USER.getLifeStyle());
+        username = USER.getUserName();
+        journeyType = USER.getJourneyType();
+        lifeStyle = USER.getLifeStyle();
+
+        usernameTv.setText(username);
+        journeyTv.setText(journeyType);
+        lifeTv.setText(lifeStyle);
 
     
         getFollow();
     }
 
     private void getFollow() {
+
+        Log.d(TAG, "getFollowers: "+ username);
+
+
     }
 
 

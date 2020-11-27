@@ -17,8 +17,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import kr.ac.konkuk.cookiehouse.DataStorage.Places;
+import kr.ac.konkuk.cookiehouse.General.StartActivity;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
+
+import static kr.ac.konkuk.cookiehouse.models.ModelUser.USER;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -132,6 +135,27 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
+
+    //사용자가 로그인 되어있는지
+    private  void checkUserStatus(){
+
+        //isLogin
+
+        boolean isLogin = USER.isAuth();
+
+        if(isLogin){
+
+            // 만약 로그인 되어있다면 홈보여주기
+
+
+        }else{
+
+            // 로그인이 안되있다면, 메인으로이동해서 로그인. 회원가입 둘중하게하도록
+            startActivity(new Intent(MainActivity.this, StartActivity.class));
+
+        }
+
+    }
 
 
 
