@@ -47,6 +47,7 @@ public class ModelJourney {
     public String userName;
 
 
+
     public ModelJourney() {
     }
 
@@ -62,6 +63,7 @@ public class ModelJourney {
         this.shared = shared;
         this.userId = userId;
         this.userName = userName;
+
     }
 
     public static ModelJourney getCurrentJourney() {
@@ -72,13 +74,14 @@ public class ModelJourney {
         ModelJourney.currentJourney = currentJourney;
     }
 
-    public JSONObject getRequestJourney() {
-        return requestJourney;
-    }
-
-    public void setRequestJourney(JSONObject requestJourney) {
-        this.requestJourney = requestJourney;
-    }
+//
+//    public JSONObject getRequestJourney() {
+//        return requestJourney;
+//    }
+//
+//    public void setRequestJourney(JSONObject requestJourney) {
+//        this.requestJourney = requestJourney;
+//    }
 
 
     public int getId() {
@@ -169,7 +172,9 @@ public class ModelJourney {
         this.userName = userName;
     }
 
-    // 서버에게 보낼 메세지 ㅠㅐ요
+
+
+//     서버에게 보낼 메세지 ㅠㅐ요
     JSONObject requestJourney = new JSONObject();
     public JSONObject transferNewJourney(String name, String type, String party, int frequency){
         try {

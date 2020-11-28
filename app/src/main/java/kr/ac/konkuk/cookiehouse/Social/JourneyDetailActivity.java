@@ -71,6 +71,7 @@ public class JourneyDetailActivity extends AppCompatActivity {
             public void onResponse(Call<ModelJourney> call, Response<ModelJourney> response) {
                 if(!response.isSuccessful()){ // 실패시
                     Log.d("상세페이지", "왜?"+response.code());
+                    Log.d("상세페이지", "왜?"+response.message());
                     return;
                 }
                 ModelJourney journey = response.body();

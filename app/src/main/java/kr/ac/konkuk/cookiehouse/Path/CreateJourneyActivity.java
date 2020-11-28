@@ -163,7 +163,7 @@ public class CreateJourneyActivity extends AppCompatActivity {
         }
     }
 
-     //새로운 Journey 저장
+//     새로운 Journey 저장
     public void saveJourney(View view) {        // 지금은 카테고리만 저장하는 역할(설정값 저장할게 이것 밖에없음 아직), 나중에 알림기능이나, 통계 on/off 블라블라
         name = journeyName.getText().toString();
         if(name.isEmpty() || type.isEmpty() || party.isEmpty() || frequency <= 0){
