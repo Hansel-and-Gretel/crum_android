@@ -47,9 +47,8 @@ public class MainJourneyActivity extends AppCompatActivity {
 
     //이거 잇어야 하단nav바 작동해요
     private Context mContext = MainJourneyActivity.this;
-    // TODO 아래 load(), save() 함수의 preferences key 이름 여기에서 선언
 
-    List<ModelJourney> journeyList;
+    List<ModelJourney> userJourneyList;
     boolean existing;
 
     @Override
@@ -70,6 +69,7 @@ public class MainJourneyActivity extends AppCompatActivity {
 
         currentJourneyBtn.setOnClickListener(onClickListener);
 
+        userJourney = new ModelJourney();
         existing = checkValidJourney();
 
         if(existing){
@@ -133,14 +133,12 @@ public class MainJourneyActivity extends AppCompatActivity {
 
     // 서버에서 현재 기록 중인(기록가능한) Journey 불러오는 함수
     private boolean checkValidJourney() {   // get existing jouney & save it to 'currentJourney', false if none
-        userJourney = new ModelJourney();
-        boolean hasExistingJourney = false;
         //1. 서버에서 유저 아이디 가지고 여정 있는지 검사
         //2. status == true 인거 없으면
         // No journeys active
 
         Call<List<ModelJourney>> call = retrofitInterface.getMyJourney(ModelUser.USER.getId());
-        Log.i("뭐고", String.valueOf(ModelUser.USER.getId()));
+        Log.i("Getting journeys for ID", String.valueOf(ModelUser.USER.getId()));
 
 
         call.enqueue(new Callback<List<ModelJourney>>() {
@@ -149,49 +147,49 @@ public class MainJourneyActivity extends AppCompatActivity {
             public void onResponse(Call<List<ModelJourney>> call, Response<List<ModelJourney>> response) {
 
                 if (!response.isSuccessful()) { // 실패시
-                    Log.d("SocialActivity", "왜?" + response.code());
+                    Log.d("SocialActivity", "ERROR메세지-" + response.code());
                     return;
                 }
 
-                journeyList = response.body();
-                Log.i("뭐고", String.valueOf(journeyList.size()));
-                Log.i("뭔데", String.valueOf(journeyList.get(0).status));
-                for(int i=0; i<journeyList.size(); i++){
+                userJourneyList = response.body();
+                existing = setResults(userJourneyList);
 
-                    Log.i("뭔데", String.valueOf(journeyList.get(i).name));
-                    if(journeyList.get(i).status){     // if there is a valid(기록 중 or 기록 가능) journey to this user
-                        userJourney = journeyList.get(i);    // then save that journey info data to local
-                        userJourney.status = true;
-                        //hasExistingJourney = true;
-                        ModelJourney.setCurrentJourney(userJourney);        // 변수 저장해둠 --> 수정?
-                        Log.i("여정 존재함", userJourney.name);
-
-                        //  break;
-                        // 그냥 true 유일하지 않을 수도 있으니까 그냥 다 출력해보고 맨 마지막꺼 쓰자
-                    }
-                }
-
-                Log.d("TAG", "Response = " + journeyList);
+                Log.d("TAG", "Response = " + userJourneyList);
             }
 
             @Override
             public void onFailure(Call<List<ModelJourney>> call, Throwable t) {
                 Log.d("SocialActivity", "error loading from API 실패!");
             }
-
         });
-        // TODO 스레드 문제
         Log.i("뭔", userJourney.toString());
 
-//        if(!ModelJourney.getCurrentJourney().name.isEmpty()){        // 현재 진행되고 있는 여정이 있다면
-////            userJourney.status = true;
-////            ModelJourney.setCurrentJourney(userJourney);        // 변수 저장해둠 --> 수정?
-//            Log.i("dkdkr", "아");
-//        }                         // 현재 경로 기록 가능한 여정이 없다면
+        if(userJourney == null){        // 현재 진행되고 있는 여정이 있다면
+            ModelJourney.setCurrentJourney(userJourney);        // 변수 저장해둠 --> 수정?
+            Log.i("dkdkr", "아");
+        }                         // 현재 경로 기록 가능한 여정이 없다면
 
 
-        return hasExistingJourney;
+        return existing;
 
+    }
+
+    private boolean setResults(List<ModelJourney> userJourneyList){
+        Log.i("Journeys Found for user", String.valueOf(userJourneyList.size()));
+        for(int i=0; i<userJourneyList.size(); i++){
+            Log.i("찾은 Journey", String.valueOf(userJourneyList.get(i).name));
+            if(userJourneyList.get(i).status){     // if there is a valid(기록 중 or 기록 가능) journey to this user
+                userJourney = userJourneyList.get(i);    // then save that journey info data to local
+                userJourney.status = true;
+                ModelJourney.setCurrentJourney(userJourney);        // 변수 저장해둠 --> 수정?
+                Log.i("여정 존재함", userJourney.name);
+                return true;
+
+                //  break;
+                // TODO 그냥 true 유일하지 않을 수도 있으니까 그냥 다 출력해보고 맨 마지막꺼 쓰자
+            }
+        }
+        return false;       // no vaild(editable) journeys found for this user
     }
 
 

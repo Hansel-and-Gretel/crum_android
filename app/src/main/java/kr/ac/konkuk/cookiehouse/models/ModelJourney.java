@@ -64,6 +64,14 @@ public class ModelJourney {
         this.userName = userName;
     }
 
+    public ModelJourney(String name, String type, String party, int frequency, boolean status) {
+        this.name = name;
+        this.type = type;
+        this.party = party;
+        this.frequency = frequency;
+        this.status = status;
+    }
+
     public static ModelJourney getCurrentJourney() {
         return currentJourney;
     }
