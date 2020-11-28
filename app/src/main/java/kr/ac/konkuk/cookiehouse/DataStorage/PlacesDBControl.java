@@ -13,6 +13,7 @@ import java.net.URLConnection;
 
 
 import kr.ac.konkuk.cookiehouse.BuildConfig;
+import kr.ac.konkuk.cookiehouse.models.Places;
 
 public class PlacesDBControl{
     public final String PACKAGE_NAME = BuildConfig.APPLICATION_ID;  // 서비스명 바뀔 수도 있어서..
@@ -152,5 +153,24 @@ public class PlacesDBControl{
         placesDB.close();
         helper.close();
     }
+
+
+    /*
+    * 현재 데이터 베이스에 있는 데이터 전체 읽어오기
+    * list로 보여줄때, adapterlocation이랑 사용
+    * */
+    public Cursor readAllData(){
+
+        String query = "SELECT * FROM "+helper.TABLE_NAME;
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db!=null){
+           cursor =  db.rawQuery(query, null);
+        }
+        return cursor;
+
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package kr.ac.konkuk.cookiehouse.DataStorage;
+package kr.ac.konkuk.cookiehouse.models;
 
 import android.os.Build;
 import android.os.Parcel;

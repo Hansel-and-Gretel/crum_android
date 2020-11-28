@@ -15,12 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Social.JourneyDetailActivity"></activity>
+        <activity android:name=".Path.PathListActivity"></activity>
+        <activity android:name=".Social.JourneyDetailActivity" />
 
         <service
             android:name=".General.MyBackgroundLocationService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity android:name=".General.StartActivity">
             <intent-filter>
@@ -31,8 +32,8 @@
         </activity> <!-- <meta-data -->
         <!-- android:name="com.google.android.actions" -->
         <!-- android:resource="@xml/actions" /> -->
-        <activity android:name=".Home.MainActivity"></activity>
-        <activity android:name=".Path.MainJourneyActivity"></activity> <!-- <activity android:name=".General.LoginActivity" /> -->
+        <activity android:name=".Home.MainActivity" />
+        <activity android:name=".Path.MainJourneyActivity" /> <!-- <activity android:name=".General.LoginActivity" /> -->
         <activity android:name=".General.SignupActivity" />
         <activity android:name=".Path.RecordJourneyActivity">
             <intent-filter>
@@ -41,12 +42,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Path.CreateJourneyActivity"></activity>
-        <activity android:name=".Path.PathActivity" />
+        <activity android:name=".Path.CreateJourneyActivity" />
         <activity android:name=".Social.SocialActivity" />
         <activity android:name=".Places.PlacesActivity" />
         <activity android:name=".MyPage.MyPageActivity" />
-        <activity android:name=".Path.PathStartActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

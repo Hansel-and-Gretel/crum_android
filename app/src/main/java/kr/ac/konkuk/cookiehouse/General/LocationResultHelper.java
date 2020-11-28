@@ -15,7 +15,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
-import kr.ac.konkuk.cookiehouse.DataStorage.Places;
+import kr.ac.konkuk.cookiehouse.models.Places;
 import kr.ac.konkuk.cookiehouse.DataStorage.PlacesDBControl;
 import kr.ac.konkuk.cookiehouse.Path.RecordJourneyActivity;
 import kr.ac.konkuk.cookiehouse.R;
