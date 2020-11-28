@@ -6,13 +6,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import kr.ac.konkuk.cookiehouse.BuildConfig;
+import kr.ac.konkuk.cookiehouse.models.ModelPlaces;
 import kr.ac.konkuk.cookiehouse.models.Places;
 
 public class PlacesDBControl{
@@ -171,6 +175,47 @@ public class PlacesDBControl{
         return cursor;
 
     }
+
+    /*
+     * 현재 데이터 베이스에 있는 데이터 전체 읽어오기
+     * map로 보여줄때,
+     * [ArrayList형식으로 리턴]
+     * */
+
+
+    public List<ModelPlaces> getAllPlaces(){
+
+        SQLiteDatabase database = helper.getReadableDatabase();
+        List<ModelPlaces> placesList = new ArrayList<>();
+        String getAll = "SELECT * FROM "+helper.TABLE_NAME;
+        Cursor cursor = database.rawQuery(getAll,null);
+        if(cursor.moveToFirst()){
+            do{
+                ModelPlaces place = new ModelPlaces();
+                place.setId(cursor.getInt(0));
+                place.setLatitude(cursor.getFloat(4));
+                place.setLongitude(cursor.getFloat(3));
+                place.setName(cursor.getString(1));
+
+                placesList.add(place);
+            }while(cursor.moveToNext());
+        }
+
+        return placesList;
+
+    }
+
+
+    //장소 객체 넘겨 받아 id가져와서 삭제함.
+    public void deletePlace(Places place){
+        SQLiteDatabase database = helper.getReadableDatabase();
+        database.delete(helper.TABLE_NAME, "place_id=?",
+                new String[]{String.valueOf(place.getId())});
+        database.close();
+    }
+
+
+
 
 
 }

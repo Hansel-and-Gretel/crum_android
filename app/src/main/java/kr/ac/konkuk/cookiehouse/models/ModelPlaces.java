@@ -2,29 +2,34 @@ package kr.ac.konkuk.cookiehouse.models;
 
 public class ModelPlaces {
 
-    String place_name, photo, note, category;
-    int time, longitude, latitude,status;
+
+    String name, photo, note, category;
+    int id;
+    float longitude, latitude;
+    long time;
+    boolean status;
 
     public ModelPlaces() {
     }
 
-    public ModelPlaces(String place_name, String photo, String note, String category, int time, int longitude, int latitude, int status) {
-        this.place_name = place_name;
+    public ModelPlaces(String name, String photo, String note, String category, int id, float longitude, float latitude, long time, boolean status) {
+        this.name = name;
         this.photo = photo;
         this.note = note;
         this.category = category;
-        this.time = time;
+        this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.time = time;
         this.status = status;
     }
 
-    public String getPlace_name() {
-        return place_name;
+    public String getName() {
+        return name;
     }
 
-    public void setPlace_name(String place_name) {
-        this.place_name = place_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhoto() {
@@ -51,35 +56,43 @@ public class ModelPlaces {
         this.category = category;
     }
 
-    public int getTime() {
-        return time;
+    public int getId() {
+        return id;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 
-    public int getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
-    public int getStatus() {
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }

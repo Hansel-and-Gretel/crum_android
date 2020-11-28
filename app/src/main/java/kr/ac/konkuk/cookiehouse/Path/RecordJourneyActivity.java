@@ -150,6 +150,14 @@ public class RecordJourneyActivity extends AppCompatActivity implements
             }
         });
 
+        mBtnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_map = new Intent(RecordJourneyActivity.this, MapsActivity.class);
+                startActivity(intent_map);
+            }
+        });
+
 
 
 

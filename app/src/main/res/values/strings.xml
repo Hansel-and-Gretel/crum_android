@@ -50,6 +50,7 @@
     <string name="PREFS_JOURNEY_TYPE">Journey_Type</string>
     <string name="PREFS_JOURNEY_PARTY">Journey_Party</string>
     <string name="PREFS_JOURNEY_FREQUENCY">Journey_Frequency</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>
