@@ -75,7 +75,7 @@ public class SocialActivity extends AppCompatActivity {
 
         retrofitInterface = RetrofitConnection.getApiClient().create(RetrofitInterface.class);
 
-        Map<String, String> data = new HashMap<>();
+//        Map<String, String> data = new HashMap<>();
         Call <List<ModelJourney>> call = retrofitInterface.getJourney();
 
         call.enqueue(new Callback<List<ModelJourney>>() {

@@ -51,5 +51,7 @@ public interface RetrofitInterface {
     @GET("/api/journey/detail/{id}")
     Call<ModelJourney> getOneJourney(@Path("id") int id);
 
+    @GET("/api/journey/mypage/{id}")
+    Call<List<ModelJourney>> getMyJourney(@Path("id") int id);
 
 }

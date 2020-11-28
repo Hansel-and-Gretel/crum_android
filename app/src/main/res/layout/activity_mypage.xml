@@ -170,16 +170,6 @@
                 android:paddingRight="20dp"
                 android:layout_marginTop="10dp">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/private_list"
-                    android:text="Private"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorSkyblue"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/blue_rounded_button_empty"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -191,6 +181,18 @@
                     android:textColor="@color/colorSkyblue"
                     android:layout_margin="10dp"
                     android:background="@drawable/blue_rounded_button_empty" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/private_list"
+                    android:text="Private"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorSkyblue"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/blue_rounded_button_empty"/>
+
             </LinearLayout>
 
 
@@ -199,18 +201,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!--recycler view-->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recyclerView_private"/>
 
                 <!--recycler view 버튼 클릭시 보이게-->
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/recyclerView_public"
+                   />
+
+                <!--recycler view-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyclerView_private"
                     android:visibility="gone" />
+
+
 
 
             </RelativeLayout>
