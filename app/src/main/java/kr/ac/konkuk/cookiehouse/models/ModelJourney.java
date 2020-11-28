@@ -41,21 +41,16 @@ public class ModelJourney {
     public boolean shared;
 
     @SerializedName("userId")
-    public int userId;
+    public String userId;
 
     @SerializedName("userName")
     public String userName;
-
-    @SerializedName("uploadSuccess")
-    public static ModelJourney responseMsg;
-
 
 
     public ModelJourney() {
     }
 
-
-    public ModelJourney(int id, String name, String type, String party, int frequency, String summary, String image, boolean status, boolean shared, int userId, String userName) {
+    public ModelJourney(int id, String name, String type, String party, int frequency, String summary, String image, boolean status, boolean shared, String userId, String userName) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -69,13 +64,6 @@ public class ModelJourney {
         this.userName = userName;
     }
 
-    public ModelJourney(String name, String type, String party, int frequency) {    // for creating new journey
-        this.name = name;
-        this.type = type;
-        this.party = party;
-        this.frequency = frequency;
-    }
-
     public static ModelJourney getCurrentJourney() {
         return currentJourney;
     }
@@ -84,6 +72,13 @@ public class ModelJourney {
         ModelJourney.currentJourney = currentJourney;
     }
 
+    public JSONObject getRequestJourney() {
+        return requestJourney;
+    }
+
+    public void setRequestJourney(JSONObject requestJourney) {
+        this.requestJourney = requestJourney;
+    }
 
 
     public int getId() {
@@ -158,11 +153,11 @@ public class ModelJourney {
         this.shared = shared;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -175,19 +170,13 @@ public class ModelJourney {
     }
 
     // 서버에게 보낼 메세지 ㅠㅐ요
-
-
+    JSONObject requestJourney = new JSONObject();
     public JSONObject transferNewJourney(String name, String type, String party, int frequency){
-        JSONObject requestJourney = new JSONObject();
-
         try {
             requestJourney.put("journeyName", name);
             requestJourney.put("type", type);
             requestJourney.put("accompany", party);
             requestJourney.put("pinFrequency", frequency);
-            // TODO 지우삼
-            //requestJourney.put("summary", "bal");
-            //requestJourney.put("image", "something");
             requestJourney.put("status", false);
             requestJourney.put("sharedFlag", false);
             // 로그인에서 받아온 정보
@@ -199,7 +188,6 @@ public class ModelJourney {
         }
         return requestJourney;
     }
-
 
 
 }

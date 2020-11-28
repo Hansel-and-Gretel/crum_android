@@ -27,7 +27,9 @@
             tools:layout_editor_absoluteX="34dp"
             tools:layout_editor_absoluteY="252dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
+
+
+        <Button
             android:id="@+id/btn_current_journey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,9 +38,26 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/blue_rounded_button_vivid"
             android:padding="8dp"
-            android:text="(No journey)"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="invisible"/>
+
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dummy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_journey"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/grey_rounded_button_empty"
+            android:padding="8dp"
+            android:text="(Nothing going on)"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:visibility="invisible"/>
 
 
         <androidx.appcompat.widget.AppCompatButton

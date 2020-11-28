@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -177,21 +178,15 @@ public class CreateJourneyActivity extends AppCompatActivity {
             Toast.makeText(CreateJourneyActivity.this, "Fill out all the forms", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            ModelJourney modelJourney = new ModelJourney(name, type, party, frequency);
-            JSONObject newJourney = modelJourney.transferNewJourney(name, type, party, frequency);
-
-
-
             // 각 Field에 값 입력
-            Call<ModelJourney> call = retrofitInterface.createJourney(name, type, party, frequency, false, false, ModelUser.USER.getId(), ModelUser.USER.getUserName());
+            // TODO: 중요한 변경사항::: status의 의미> true==입력가능,아직완료안된상태의 journey / false==summary까지 입력되고 난 완료된 journey
+            Call<ModelJourney> call = retrofitInterface.createJourney(name, type, party, frequency, true, false, ModelUser.USER.getId(), ModelUser.USER.getUserName());
 
 
             call.enqueue(new Callback<ModelJourney>() {
                 @Override
                 public void onResponse(Call<ModelJourney> call, Response<ModelJourney> response) {
                     if(response.code() == 200){
-                        // TODO
-                        ModelJourney something = response.body();
                         Toast.makeText(CreateJourneyActivity.this, "Journey Created", Toast.LENGTH_SHORT).show();
                         saveNewJourney();
                         Intent intent = new Intent(CreateJourneyActivity.this, RecordJourneyActivity.class);
@@ -215,12 +210,15 @@ public class CreateJourneyActivity extends AppCompatActivity {
 
     // Save new journey to 'currentJourney'
     private void saveNewJourney() {
+        ModelJourney currentJourney = new ModelJourney();
         currentJourney.name = name;
         currentJourney.type = type;
         currentJourney.party = party;
         currentJourney.frequency = frequency;
-        currentJourney.status = false;
+        currentJourney.status = true;
         currentJourney.shared = false;
+
+        ModelJourney.setCurrentJourney(currentJourney);
     }
 
 
