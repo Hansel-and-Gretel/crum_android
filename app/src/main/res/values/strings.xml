@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name"> movie </string>
+    <string name="app_name">sweetrail</string>
     <string name="Journey1"> Europe for 30 days</string>
     <string name="Journey2"> Daily Life </string>
     <string name="Journey3"> Europe for 30 days</string>
+
+
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+
 
     <!--    TYPES-->
     <string-array name="journey_type">
@@ -27,7 +31,6 @@
         <item>Lover</item>
         <item>Group</item>
     </string-array>
-
 
 
     <!--location-->

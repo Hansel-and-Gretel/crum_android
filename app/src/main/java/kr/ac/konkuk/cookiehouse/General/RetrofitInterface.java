@@ -17,6 +17,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 /*
  * Call<객체타입>
@@ -59,5 +61,10 @@ public interface RetrofitInterface {
     @GET("/api/journey/main")
     Call<List<ModelJourney>> getJourney();
 
+    @GET("/api/journey/detail/{id}")
+    Call<ModelJourney> getOneJourney(@Path("id") int id);
+
+    @GET("/api/journey/mypage/{id}")
+    Call<List<ModelJourney>> getMyJourney(@Path("id") int id);
 
 }
