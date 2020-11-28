@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -155,6 +156,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+
+    //11.28 지우
+    private void load() {
+        // TODO
+        //SharedPreferences appData = new Sha // 값 비움
+        // 또 가져올 정보 있으면 가져옴 --> journey
     }
 
 

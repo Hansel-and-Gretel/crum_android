@@ -67,64 +67,64 @@ public class SocialActivity extends AppCompatActivity {
 
 
 
-        fetchJourney();
+        //fetchJourney();
 
     }
 
-    public void fetchJourney(){
-
-        retrofitInterface = RetrofitConnection.getApiClient().create(RetrofitInterface.class);
-
-        Map<String, String> data = new HashMap<>();
-        Call <List<ModelJourney>> call = retrofitInterface.getJourney();
-
-        call.enqueue(new Callback<List<ModelJourney>>() {
-            
-            @Override
-            public void onResponse(Call<List<ModelJourney>> call, Response<List<ModelJourney>> response) {
-
-                if(!response.isSuccessful()){ // 실패시
-                    Log.d("SocialActivity", "왜?"+response.code());
-                    return;
-                }
-
-
-                journeyList = response.body();
-
-
-//                for(ModelJourney journey : journeyList){
-//                    postList.add(journey);
-//                }
-
-                Log.d("TAG","Response = "+journeyList);
-
-
-//                for(ModelJourney modelJourney: response.body()){
-//                    Log.e(TAG, modelJourney.getName());
-//                    journeyList.add(modelJourney);
+//    public void fetchJourney(){
 //
+//        retrofitInterface = RetrofitConnection.getApiClient().create(RetrofitInterface.class);
+//
+//        Map<String, String> data = new HashMap<>();
+//        Call <List<ModelJourney>> call = retrofitInterface.getJourney();
+//
+//        call.enqueue(new Callback<List<ModelJourney>>() {
+//
+//            @Override
+//            public void onResponse(Call<List<ModelJourney>> call, Response<List<ModelJourney>> response) {
+//
+//                if(!response.isSuccessful()){ // 실패시
+//                    Log.d("SocialActivity", "왜?"+response.code());
+//                    return;
 //                }
-
-//                ModelJourney journey = response.body();
-//                journeyList.add(journey);
-//                Log.d(TAG, "이 여행이 추가됨: " + journey.getName());
-
-                adapterJourneys = new AdapterJourneys(SocialActivity.this, journeyList);
-//                adapterJourneys.setJourneyList(journeyList);
-                recyclerView.setAdapter(adapterJourneys);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<ModelJourney>> call, Throwable t) {
-                Log.d("SocialActivity", "error loading from API 실패!");
-
-
-            }
-        });
-
-    }
+//
+//
+//                journeyList = response.body();
+//
+//
+////                for(ModelJourney journey : journeyList){
+////                    postList.add(journey);
+////                }
+//
+//                Log.d("TAG","Response = "+journeyList);
+//
+//
+////                for(ModelJourney modelJourney: response.body()){
+////                    Log.e(TAG, modelJourney.getName());
+////                    journeyList.add(modelJourney);
+////
+////                }
+//
+////                ModelJourney journey = response.body();
+////                journeyList.add(journey);
+////                Log.d(TAG, "이 여행이 추가됨: " + journey.getName());
+//
+//                adapterJourneys = new AdapterJourneys(SocialActivity.this, journeyList);
+////                adapterJourneys.setJourneyList(journeyList);
+//                recyclerView.setAdapter(adapterJourneys);
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<ModelJourney>> call, Throwable t) {
+//                Log.d("SocialActivity", "error loading from API 실패!");
+//
+//
+//            }
+//        });
+//
+//    }
 
 
 

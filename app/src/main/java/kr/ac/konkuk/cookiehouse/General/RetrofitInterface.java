@@ -1,5 +1,7 @@
 package kr.ac.konkuk.cookiehouse.General;
 
+import com.google.android.gms.common.internal.HideFirstParty;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ import kr.ac.konkuk.cookiehouse.models.ModelJourney;
 import kr.ac.konkuk.cookiehouse.models.ModelUser;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
@@ -34,14 +38,23 @@ public interface RetrofitInterface {
     @POST("/api/user/login")
     Call<ModelUser> executeLogin(@Body HashMap<String, String> map);
 
-    @GET("/api/user/auth")
-    Call<ModelUser> getUserInfo();
-
     @POST("/api/user/register")
     Call<Void> executeSignup(@Body HashMap<String, String> map);
 
+//    @POST("/api/journey/upload")
+//    Call<ModelJourney> createJourney(@Body JSONObject newJourney);
+
+    @FormUrlEncoded
     @POST("/api/journey/upload")
-    Call<ModelJourney> createJourney(@Body JSONObject newJourney);
+    Call<ModelJourney> createJourney(
+            @Field("journeyName") String name,
+            @Field("type") String type,
+            @Field("accompany") String party,
+            @Field("pinFrequency") int frequency,
+            @Field("status") boolean status,
+            @Field("sharedFlag") boolean shared,
+            @Field("userId") int userId,
+            @Field("userName") String userName);
 
     @GET("/api/journey/main")
     Call<List<ModelJourney>> getJourney();

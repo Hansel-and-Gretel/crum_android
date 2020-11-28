@@ -40,4 +40,13 @@
         <item quantity="other">%d locations reported</item>
     </plurals>
 
+
+    <!--SharedPreferences key-->
+    <string name="PREFS_JOURNEY_EXIST">Journey_Exists</string>
+    <string name="PREFS_JOURNEY_NAME">Journey_Name</string>
+    <string name="PREFS_JOURNEY_TYPE">Journey_Type</string>
+    <string name="PREFS_JOURNEY_PARTY">Journey_Party</string>
+    <string name="PREFS_JOURNEY_FREQUENCY">Journey_Frequency</string>
+
+
 </resources>
