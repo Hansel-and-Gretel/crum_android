@@ -141,7 +141,7 @@ public class MyPageActivity extends AppCompatActivity {
     private void myPrivateThumbs() {
         retrofitInterface = RetrofitConnection.getApiClient().create(RetrofitInterface.class);
 
-        Call<List<ModelJourney>> call = retrofitInterface.getMyJourney(1);
+        Call<List<ModelJourney>> call = retrofitInterface.getMyJourney(profileId);
 
         call.enqueue(new Callback<List<ModelJourney>>() {
 
