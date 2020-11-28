@@ -22,16 +22,17 @@
         <!-- middle section-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/relLayout2"
             android:layout_below="@+id/relLayout1">
-            <include layout="@layout/layout_center_viewpager"/>
+
+<!--            <include layout="@layout/layout_center_viewpager"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/username"
-                android:text="username is here"
+                android:text="welcome"
+                android:layout_centerInParent="true"
                 android:textSize="30sp"
                 />
 

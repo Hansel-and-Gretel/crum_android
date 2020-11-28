@@ -1,11 +1,13 @@
 package kr.ac.konkuk.cookiehouse.Social;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,6 +40,7 @@ public class JourneyDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_detail);
+        setToolbar();
 
 
         Intent intent = getIntent();
@@ -110,4 +113,31 @@ public class JourneyDetailActivity extends AppCompatActivity {
 
 
     }
+
+    /*
+     * Toolbar 세팅
+     * */
+
+    private void setToolbar(){
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        TextView toolbar_title = (TextView)findViewById(R.id.toolbar_title);
+        setSupportActionBar(toolbar);
+        toolbar_title.setText("Journey Details");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

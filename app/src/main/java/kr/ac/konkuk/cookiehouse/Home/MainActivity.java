@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         //인텐드
         Intent intent = getIntent();
 
-        TextView usernameView = findViewById(R.id.username);
+
 //        String username = intent.getExtras().getString("username");
 //        usernameView.setText(username);
 
