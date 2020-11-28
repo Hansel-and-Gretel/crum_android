@@ -34,6 +34,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static java.lang.Thread.sleep;
+
 
 public class MainJourneyActivity extends AppCompatActivity {
     private static final String TAG = "MainJourneyActivity";
@@ -44,6 +46,8 @@ public class MainJourneyActivity extends AppCompatActivity {
     ModelJourney userJourney;
 
 
+    Button currentJourneyBtn;
+    Button dummy;
 
     //이거 잇어야 하단nav바 작동해요
     private Context mContext = MainJourneyActivity.this;
@@ -58,27 +62,18 @@ public class MainJourneyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_journey_main);
         setupBottomNavigationView();
 
-        Button currentJourneyBtn = findViewById(R.id.btn_current_journey);
-        Button dummy = findViewById(R.id.btn_dummy);        // 아무 여정 없을 떄
+        currentJourneyBtn = findViewById(R.id.btn_current_journey);
+        dummy = findViewById(R.id.btn_dummy);        // 아무 여정 없을 떄
         Button createJourneyBtn = findViewById(R.id.btn_start_new_journey);
         Button previousJourneyBtn = findViewById(R.id.btn_previous_journey);
 
         BtnOnClickListener onClickListener = new BtnOnClickListener();
         createJourneyBtn.setOnClickListener(onClickListener);
         previousJourneyBtn.setOnClickListener(onClickListener);
-
         currentJourneyBtn.setOnClickListener(onClickListener);
 
         userJourney = new ModelJourney();
-        existing = checkValidJourney();
-
-        if(existing){
-            currentJourneyBtn.setText(ModelJourney.getCurrentJourney().getName());
-            currentJourneyBtn.setVisibility(View.VISIBLE);
-        } else {
-            dummy.setVisibility(View.VISIBLE);
-        }
-
+        checkValidJourney();
     }
 
 
@@ -116,6 +111,7 @@ public class MainJourneyActivity extends AppCompatActivity {
                                 finish();
                             }
                         });
+                        deletingFormer.show();
                     } else {
                         startActivity(intent2);
                         finish();
@@ -132,10 +128,11 @@ public class MainJourneyActivity extends AppCompatActivity {
 
 
     // 서버에서 현재 기록 중인(기록가능한) Journey 불러오는 함수
-    private boolean checkValidJourney() {   // get existing jouney & save it to 'currentJourney', false if none
+    private void checkValidJourney() {   // get existing jouney & save it to 'currentJourney', false if none
         //1. 서버에서 유저 아이디 가지고 여정 있는지 검사
         //2. status == true 인거 없으면
         // No journeys active
+
 
         Call<List<ModelJourney>> call = retrofitInterface.getMyJourney(ModelUser.USER.getId());
         Log.i("Getting journeys for ID", String.valueOf(ModelUser.USER.getId()));
@@ -152,7 +149,7 @@ public class MainJourneyActivity extends AppCompatActivity {
                 }
 
                 userJourneyList = response.body();
-                existing = setResults(userJourneyList);
+                setResults(userJourneyList);
 
                 Log.d("TAG", "Response = " + userJourneyList);
             }
@@ -162,20 +159,13 @@ public class MainJourneyActivity extends AppCompatActivity {
                 Log.d("SocialActivity", "error loading from API 실패!");
             }
         });
-        Log.i("뭔", userJourney.toString());
-
-        if(userJourney == null){        // 현재 진행되고 있는 여정이 있다면
-            ModelJourney.setCurrentJourney(userJourney);        // 변수 저장해둠 --> 수정?
-            Log.i("dkdkr", "아");
-        }                         // 현재 경로 기록 가능한 여정이 없다면
-
-
-        return existing;
-
     }
 
-    private boolean setResults(List<ModelJourney> userJourneyList){
+    private void setResults(List<ModelJourney> userJourneyList){
+        existing = false;   // no vaild(editable) journeys found for this user
+
         Log.i("Journeys Found for user", String.valueOf(userJourneyList.size()));
+
         for(int i=0; i<userJourneyList.size(); i++){
             Log.i("찾은 Journey", String.valueOf(userJourneyList.get(i).name));
             if(userJourneyList.get(i).status){     // if there is a valid(기록 중 or 기록 가능) journey to this user
@@ -183,13 +173,18 @@ public class MainJourneyActivity extends AppCompatActivity {
                 userJourney.status = true;
                 ModelJourney.setCurrentJourney(userJourney);        // 변수 저장해둠 --> 수정?
                 Log.i("여정 존재함", userJourney.name);
-                return true;
-
+                existing = true;
                 //  break;
                 // TODO 그냥 true 유일하지 않을 수도 있으니까 그냥 다 출력해보고 맨 마지막꺼 쓰자
             }
         }
-        return false;       // no vaild(editable) journeys found for this user
+
+        if(existing){
+            currentJourneyBtn.setText(ModelJourney.getCurrentJourney().getName());
+            currentJourneyBtn.setVisibility(View.VISIBLE);
+        } else {
+            dummy.setVisibility(View.VISIBLE);
+        }
     }
 
 
