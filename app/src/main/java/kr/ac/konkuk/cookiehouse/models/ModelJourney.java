@@ -10,7 +10,7 @@ import static kr.ac.konkuk.cookiehouse.models.ModelUser.USER;
 public class ModelJourney {
     public static ModelJourney currentJourney = null;
 
-    @SerializedName("id")
+    @SerializedName("journeyId")
     public int id;                //PK
 //
 //    @SerializedName("")

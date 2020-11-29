@@ -2,8 +2,13 @@ package kr.ac.konkuk.cookiehouse.General;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
 import java.util.HashMap;
+import java.util.List;
 
 import kr.ac.konkuk.cookiehouse.Home.MainActivity;
 import kr.ac.konkuk.cookiehouse.Path.CreateJourneyActivity;
@@ -26,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static kr.ac.konkuk.cookiehouse.models.ModelUser.USER;
 
 public class StartActivity extends AppCompatActivity {
+    private static final int CAMERA_PERMISSIONS_GRANTED = 100;
 //11.22
 
     RetrofitConnection retrofitConnection = new RetrofitConnection();
@@ -36,6 +46,8 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        //11.29 TODO 위치 변경
+        checkPermission();
 
 
         findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
@@ -88,8 +100,12 @@ public class StartActivity extends AppCompatActivity {
                             USER = loginResponse.body();    // store user info into model
                             Log.i("USER_ID", String.valueOf(USER.getId()));
                             // TODO 지워야대 --> 테스트용
-                            Intent intent = new Intent(StartActivity.this, MainActivity.class);
-                            startActivity(intent);
+                            if(USER.getId()!=0){
+                                Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(StartActivity.this, "아이디 또는 비밀번호가 잘못되었거나 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                            }
 
                         }else if(loginResponse.code() == 400){
                             Toast.makeText(StartActivity.this, "아이디 또는 비밀번호가 잘못되었거나 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
@@ -169,5 +185,30 @@ public class StartActivity extends AppCompatActivity {
 
 
 
+    }
+
+    // 카메라 권한 설정 체크를 위한 함수
+    public void checkPermission() {        // ted 라이브러리 사용해서 권한 체크
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Toast.makeText(StartActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(StartActivity.this, "권한 거부: " + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        TedPermission.with(this)
+                .setPermissionListener(permissionListener)
+                .setRationaleMessage("ZEKAK 사용을 위해서는 카메라, 갤러리 접근 권한이 필요합니다")
+                .setDeniedMessage("[설정] > [권한] 에서 권한을 다시 허용할 수 있습니다")
+                .setDeniedMessage(Manifest.permission.CAMERA)
+                .setPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA})
+                .check();
     }
 }

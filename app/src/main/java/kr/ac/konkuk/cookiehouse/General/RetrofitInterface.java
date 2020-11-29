@@ -58,6 +58,20 @@ public interface RetrofitInterface {
             @Field("userId") int userId,
             @Field("userName") String userName);
 
+    @FormUrlEncoded
+    @POST("/api/journey/upload")
+    Call<ModelJourney> uploadFinishedJourney(
+            @Field("journeyName") String name,
+            @Field("type") String type,
+            @Field("accompany") String party,
+            @Field("pinFrequency") int frequency,
+            @Field("summary") String summary,
+            @Field("image") String image,
+            @Field("status") boolean status,
+            @Field("sharedFlag") boolean shared,
+            @Field("userId") int userId,
+            @Field("userName") String userName);
+
     @GET("/api/journey/main")
     Call<List<ModelJourney>> getJourney();
 

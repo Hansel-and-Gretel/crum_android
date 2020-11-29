@@ -4,7 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
@@ -14,15 +20,19 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.ac.konkuk.cookiehouse.DataStorage.ImageFile;
 import kr.ac.konkuk.cookiehouse.General.RetrofitConnection;
 import kr.ac.konkuk.cookiehouse.General.RetrofitInterface;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.adapters.AdapterJourneys;
 import kr.ac.konkuk.cookiehouse.models.ModelJourney;
+import kr.ac.konkuk.cookiehouse.models.ModelUser;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,7 +67,6 @@ public class JourneyDetailActivity extends AppCompatActivity {
 
         //현재 여정 정보 불러오기
         loadJourneyInfo(jId);
-
 
     }
 
@@ -95,12 +104,17 @@ public class JourneyDetailActivity extends AppCompatActivity {
                 jImage.setVisibility(View.VISIBLE);
                 try{
                     Picasso.get().load(post_image).placeholder(R.drawable.test_image).into(jImage);
+
+                    // 11.29 지우--> 그 사진이 본인이 올린거면
+                    // (보여주기용)
+                    if(id == ModelUser.USER.getId()){
+                        setImage(post_image);
+                    }
                 }catch (Exception e){
 
                 }
                 post_sum = journey.getSummary();
                 jSum.setText(post_sum);
-//                }
 
 
             }
@@ -138,6 +152,14 @@ public class JourneyDetailActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setImage(String journeyImagePath) throws IOException {
+        if(journeyImagePath.isEmpty()) {
+            return;
+        }
+        String path = ImageFile.storageDir + "/" + journeyImagePath;
+        jImage.setImageBitmap(BitmapFactory.decodeFile(path));
     }
 
 }
