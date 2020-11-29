@@ -47,6 +47,7 @@ import kr.ac.konkuk.cookiehouse.General.MyBackgroundLocationService;
 import kr.ac.konkuk.cookiehouse.Home.MainActivity;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
+import kr.ac.konkuk.cookiehouse.models.ModelJourney;
 
 public class RecordJourneyActivity extends AppCompatActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener,
@@ -80,7 +81,11 @@ public class RecordJourneyActivity extends AppCompatActivity implements
 
         setupBottomNavigationView();
 
+        TextView mJourneyName = findViewById(R.id.journey_name_tv);
+        mJourneyName.setText(ModelJourney.getCurrentJourney().name);
+
         mOutputText = findViewById(R.id.testresult_tv);
+
 
         //수동 로케이션 요청
 //        mBtnLocationRequest = findViewById(R.id.btn_location_request);

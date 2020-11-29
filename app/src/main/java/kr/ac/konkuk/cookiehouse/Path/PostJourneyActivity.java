@@ -332,7 +332,7 @@ public class PostJourneyActivity extends AppCompatActivity {
         // Photo from camera
         if(requestCode == PICK_FROM_CAMERA) {
             //Uri photoUri = data.getData();
-            if (resultCode == RESULT_OK) {      // 이부분 https://developer.android.com/training/camera/photobasics?hl=ko#java 참고
+            if (resultCode == RESULT_OK && data != null) {      // 이부분 https://developer.android.com/training/camera/photobasics?hl=ko#java 참고
                 assert data != null;
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");

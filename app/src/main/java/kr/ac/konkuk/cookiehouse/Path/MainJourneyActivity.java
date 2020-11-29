@@ -104,7 +104,7 @@ public class MainJourneyActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // TODO upload current journey to server
-                                //
+                                //  & turn current journey status to false (서버에서 해줘야됨)
                                 Toast.makeText(MainJourneyActivity.this, "Successfully stored to server: " + userJourney.name, Toast.LENGTH_LONG).show();
                                 deletingFormer.dismiss();
                                 startActivity(intent2);

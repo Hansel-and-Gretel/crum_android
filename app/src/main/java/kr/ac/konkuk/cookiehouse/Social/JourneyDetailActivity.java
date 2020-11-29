@@ -158,7 +158,7 @@ public class JourneyDetailActivity extends AppCompatActivity {
         if(journeyImagePath.isEmpty()) {
             return;
         }
-        String path = ImageFile.storageDir + "/" + journeyImagePath;
+        String path = ImageFile.storageDir + journeyImagePath;
         jImage.setImageBitmap(BitmapFactory.decodeFile(path));
     }
 

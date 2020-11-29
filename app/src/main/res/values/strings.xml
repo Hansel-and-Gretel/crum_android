@@ -10,7 +10,6 @@
 
     <!--    TYPES-->
     <string-array name="journey_type">
-        <item>(수정필요)</item>
         <item>Daily Life</item>
         <item>Nature</item>
         <item>Adventure</item>
@@ -24,7 +23,6 @@
 
     <!--    PARTY-->
     <string-array name="journey_with">
-        <item>(수정필요)</item>
         <item>Solo</item>
         <item>Family</item>
         <item>Friends</item>
