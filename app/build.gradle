@@ -51,6 +51,16 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
 
+    //circle image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0' //t
+    implementation 'com.github.mohammadatif:CircularImageView:1.0.0'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
+    //gson
+        implementation 'com.google.code.gson:gson:2.8.6'
 
 
 

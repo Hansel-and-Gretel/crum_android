@@ -124,7 +124,7 @@
             android:text="Start New Journey"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:onClick="saveJourney"/>
+            android:onClick="uploadJourney"/>
 
 
     </LinearLayout>

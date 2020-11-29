@@ -4,15 +4,24 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import kr.ac.konkuk.cookiehouse.BuildConfig;
+import kr.ac.konkuk.cookiehouse.models.ModelPlaces;
+import kr.ac.konkuk.cookiehouse.models.Places;
 
 public class PlacesDBControl{
     public final String PACKAGE_NAME = BuildConfig.APPLICATION_ID;  // 서비스명 바뀔 수도 있어서..
@@ -38,7 +47,7 @@ public class PlacesDBControl{
         placesDB = context.openOrCreateDatabase(helper.PLACES_DATABASE_NAME, Context.MODE_PRIVATE, null);
         placesDB = helper.getWritableDatabase();
         // TODO: db 저장경로 다른 곳으로 하고싶으면 사용하삼
-        // final String DB_ADDRESS = Environment.getDataDirectory().getAbsolutePath() +"/data/"+ PACKAGE_NAME + "/databases/places.db";
+//         final String DB_ADDRESS = Environment.getDataDirectory().getAbsolutePath() +"/data/"+ PACKAGE_NAME + "/databases/places.db";
     }
 
 //        Runnable(new Runnable() {
@@ -128,6 +137,8 @@ public class PlacesDBControl{
         return cursor;
     }
 
+
+
 //    public boolean edit(Places place, int placeID){
 //
 //    }
@@ -152,5 +163,134 @@ public class PlacesDBControl{
         placesDB.close();
         helper.close();
     }
+
+
+    /*
+    * 현재 데이터 베이스에 있는 데이터 전체 읽어오기
+    * list로 보여줄때, adapterlocation이랑 사용
+    * */
+    public Cursor readAllData(){
+
+        String query = "SELECT * FROM "+helper.TABLE_NAME;
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db!=null){
+           cursor =  db.rawQuery(query, null);
+        }
+        return cursor;
+
+    }
+
+    /*
+     * 현재 데이터 베이스에 있는 데이터 전체 읽어오기
+     * map로 보여줄때,
+     * [ArrayList형식으로 리턴]
+     * */
+
+
+    public List<ModelPlaces> getAllPlaces(){
+
+        SQLiteDatabase database = helper.getReadableDatabase();
+        List<ModelPlaces> placesList = new ArrayList<>();
+        String getAll = "SELECT * FROM "+helper.TABLE_NAME;
+        Cursor cursor = database.rawQuery(getAll,null);
+        if(cursor.moveToFirst()){
+            do{
+                ModelPlaces place = new ModelPlaces();
+                place.setId(cursor.getInt(0));
+                place.setLatitude(cursor.getFloat(4));
+                place.setLongitude(cursor.getFloat(3));
+                place.setName(cursor.getString(1));
+
+                placesList.add(place);
+            }while(cursor.moveToNext());
+        }
+
+        return placesList;
+
+    }
+
+
+    //장소 객체 넘겨 받아 id가져와서 삭제함.
+    public void deletePlace(Places place){
+        SQLiteDatabase database = helper.getReadableDatabase();
+        database.delete(helper.TABLE_NAME, "place_id=?",
+                new String[]{String.valueOf(place.getId())});
+        database.close();
+    }
+
+
+
+    /*
+    *
+    * 이건 현재 sqlite파일을 json으로 바꾼 내용입니다.
+    *
+    * json을 gson으로 전환해서 (Gson gson = new Gson();)
+    * 서버에 보내면 되요요
+    *
+    * 아 근데 그냥 json으로 보내면 되나?
+    *
+    * https://github.com/google/gson
+    * https://re-build.tistory.com/41
+    *
+   * */
+
+    public JSONArray getResults()
+    {
+
+//        String myPath = DB_PATH + helper.PLACES_DATABASE_NAME;// Set path to your database
+
+        String myTable = helper.TABLE_NAME;//Set name of your table
+
+
+        SQLiteDatabase myDataBase = SQLiteDatabase.openDatabase(String.valueOf(context.getDatabasePath("places.db")), null, SQLiteDatabase.OPEN_READONLY);
+
+        String searchQuery = "SELECT  * FROM " + myTable;
+        Cursor cursor = myDataBase.rawQuery(searchQuery, null );
+
+        JSONArray resultSet = new JSONArray();
+
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() == false) {
+
+            int totalColumn = cursor.getColumnCount();
+            JSONObject rowObject = new JSONObject();
+
+            for( int i=0 ;  i< totalColumn ; i++ )
+            {
+                if( cursor.getColumnName(i) != null )
+                {
+                    try
+                    {
+                        if( cursor.getString(i) != null )
+                        {
+                            Log.d("TAG_NAME", cursor.getString(i) );
+                            rowObject.put(cursor.getColumnName(i) ,  cursor.getString(i) );
+                        }
+                        else
+                        {
+                            rowObject.put( cursor.getColumnName(i) ,  "" );
+                        }
+                    }
+                    catch( Exception e )
+                    {
+                        Log.d("TAG_NAME", e.getMessage()  );
+                    }
+                }
+            }
+            resultSet.put(rowObject);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        Log.d("TAG_NAME", resultSet.toString() );
+        return resultSet;
+    }
+
+
+
+
+
+
 
 }

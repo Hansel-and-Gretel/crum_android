@@ -20,6 +20,8 @@ import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -43,11 +46,15 @@ import kr.ac.konkuk.cookiehouse.General.LocationResultHelper;
 import kr.ac.konkuk.cookiehouse.General.MyBackgroundLocationService;
 import kr.ac.konkuk.cookiehouse.Home.MainActivity;
 import kr.ac.konkuk.cookiehouse.R;
+import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
 
 public class RecordJourneyActivity extends AppCompatActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
+
+
+    private static final int ACTIVITY_NUM = 1;
 
 
     public static final int DEFAULT_ZOOM = 15;
@@ -61,7 +68,7 @@ public class RecordJourneyActivity extends AppCompatActivity implements
 
     public static final String TAG = "MyTag";
     private TextView mOutputText;
-    private Button mBtnLocationRequest, mBtnStartService, mBtnStopService;
+    private Button mBtnLocationRequest, mBtnStartService, mBtnStopService, mBtnList, mBtnMap, mBtnFinish;
     private FusedLocationProviderClient mLocationClient;
     private LocationCallback mLocationCallback;
 
@@ -71,12 +78,17 @@ public class RecordJourneyActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_journey);
 
+        setupBottomNavigationView();
+
         mOutputText = findViewById(R.id.testresult_tv);
 
         //수동 로케이션 요청
 //        mBtnLocationRequest = findViewById(R.id.btn_location_request);
         mBtnStartService = findViewById(R.id.start_btn);
         mBtnStopService = findViewById(R.id.stop_btn);
+        mBtnList = findViewById(R.id.list_btn);
+        mBtnMap = findViewById(R.id.map_btn);
+        mBtnFinish = findViewById(R.id.finishBtn);
 
 
         locationinit();
@@ -127,6 +139,35 @@ public class RecordJourneyActivity extends AppCompatActivity implements
                 stopLocationService();
             }
         });
+
+
+        mBtnList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent_list = new Intent(RecordJourneyActivity.this, PathListActivity.class);
+                startActivity(intent_list);
+
+            }
+        });
+
+        mBtnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_map = new Intent(RecordJourneyActivity.this, MapsActivity.class);
+                startActivity(intent_map);
+            }
+        });
+
+        mBtnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RecordJourneyActivity.this, PostJourneyActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 
@@ -339,6 +380,23 @@ public class RecordJourneyActivity extends AppCompatActivity implements
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+
+
+
+    /*
+     * Bottom Navigation view setup
+     * */
+    private void setupBottomNavigationView(){
+        Log.d(TAG,"SetupBottomNavigationView : setting up BottomNavigationView");
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
+
+    }
+
 }
 
 

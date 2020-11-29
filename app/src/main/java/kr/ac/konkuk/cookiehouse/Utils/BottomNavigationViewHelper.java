@@ -14,7 +14,6 @@ import kr.ac.konkuk.cookiehouse.MyPage.MyPageActivity;
 import kr.ac.konkuk.cookiehouse.Path.MainJourneyActivity;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Home.MainActivity;
-import kr.ac.konkuk.cookiehouse.Path.PathActivity;
 import kr.ac.konkuk.cookiehouse.Places.PlacesActivity;
 import kr.ac.konkuk.cookiehouse.Social.SocialActivity;
 

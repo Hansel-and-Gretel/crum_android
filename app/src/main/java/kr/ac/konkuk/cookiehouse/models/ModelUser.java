@@ -4,6 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class ModelUser {
+
+    @SerializedName("isAuth")
+            boolean isAuth;
+
     @SerializedName("userId")
             int id;
 
@@ -16,29 +20,50 @@ public class ModelUser {
     @SerializedName("password")
             String password;
 
-    @SerializedName("image")
-            String image;
+    @SerializedName("userImg")
+            String userImg;
 
     @SerializedName("lifeStyle")
             String lifeStyle;
 
-    @SerializedName("journeyStyle")
-            String journeyStyle;
+    @SerializedName("journeyType")
+            String journeyType;
 
-    // TODO 이거 로그인 시 호출되는 부분에 넣기
+
+    // 유일하게 존재 --> 현재 사용자의 account info
     public static ModelUser USER;
 
+
     public ModelUser() {
+
     }
 
-    public ModelUser(int id, String email, String userName, String password, String image, String token, String lifeStyle, String journeyStyle) {
+    public ModelUser(boolean isAuth, int id, String email, String userName, String password, String userImg, String lifeStyle, String journeyType) {
+        this.isAuth = isAuth;
         this.id = id;
         this.email = email;
         this.userName = userName;
         this.password = password;
-        this.image = image;
+        this.userImg = userImg;
         this.lifeStyle = lifeStyle;
-        this.journeyStyle = journeyStyle;
+        this.journeyType = journeyType;
+    }
+
+    public boolean isAuth() {
+        return isAuth;
+    }
+
+    public void setAuth(boolean auth) {
+        isAuth = auth;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -65,25 +90,35 @@ public class ModelUser {
         this.password = password;
     }
 
-    public String getImage() {
-        return image;
+    public String getUserImg() {
+        return userImg;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
     }
 
-    public String getLifeStyle() { return lifeStyle; }
+    public String getLifeStyle() {
+        return lifeStyle;
+    }
 
     public void setLifeStyle(String lifeStyle) {
         this.lifeStyle = lifeStyle;
     }
 
-    public String getJourneyStyle() {
-        return journeyStyle;
+    public String getJourneyType() {
+        return journeyType;
     }
 
-    public void setJourneyStyle(String journeyStyle) {
-        this.journeyStyle = journeyStyle;
+    public void setJourneyType(String journeyType) {
+        this.journeyType = journeyType;
+    }
+
+    public static ModelUser getUSER() {
+        return USER;
+    }
+
+    public static void setUSER(ModelUser USER) {
+        ModelUser.USER = USER;
     }
 }

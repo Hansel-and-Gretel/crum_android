@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,25 +25,31 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.ac.konkuk.cookiehouse.General.RetrofitConnection;
 import kr.ac.konkuk.cookiehouse.General.RetrofitInterface;
+import kr.ac.konkuk.cookiehouse.General.StartActivity;
 import kr.ac.konkuk.cookiehouse.R;
 import kr.ac.konkuk.cookiehouse.Utils.BottomNavigationViewHelper;
 import kr.ac.konkuk.cookiehouse.models.ModelJourney;
+import kr.ac.konkuk.cookiehouse.models.ModelUser;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.http.Body;
 
+import static kr.ac.konkuk.cookiehouse.models.ModelJourney.currentJourney;
+
+
 public class CreateJourneyActivity extends AppCompatActivity {
 
     private static final String TAG = "CreateJourneyActivity";
-    private static final String PREFS_NAME = "Journey_Status";
     SharedPreferences appData;
 
     RetrofitConnection retrofitConnection = new RetrofitConnection();
+    RetrofitInterface retrofitInterface = RetrofitConnection.getApiClient().create(RetrofitInterface.class);
 
 
     // TODO: freqency settings
@@ -59,7 +66,8 @@ public class CreateJourneyActivity extends AppCompatActivity {
     Button frequencyBtn;
     Button createJourneyBtn;
 
-    ModelJourney modelJourney = new ModelJourney();
+    // TODO 잠깐
+    //ModelJourney modelJourney;
     String name = "";
     String type = null;
     String party = "";
@@ -72,7 +80,6 @@ public class CreateJourneyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_journey_new);
-        appData = getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
 
         journeyName = findViewById(R.id.input_journey_name);
         journeyType = findViewById(R.id.input_journey_type);
@@ -162,8 +169,8 @@ public class CreateJourneyActivity extends AppCompatActivity {
         }
     }
 
-     //새로운 Journey 저장
-    public void saveJourney(View view) {        // 지금은 카테고리만 저장하는 역할(설정값 저장할게 이것 밖에없음 아직), 나중에 알림기능이나, 통계 on/off 블라블라
+     //새로운 Journey 저장 (xml 상에서 onClick 구현되어있음)
+    public void uploadJourney(View view) {        // 지금은 카테고리만 저장하는 역할(설정값 저장할게 이것 밖에없음 아직), 나중에 알림기능이나, 통계 on/off 블라블라
         name = journeyName.getText().toString();
         if(name.isEmpty() || type.isEmpty() || party.isEmpty() || frequency <= 0){
             // 하나라도 입력X
@@ -171,28 +178,22 @@ public class CreateJourneyActivity extends AppCompatActivity {
             Toast.makeText(CreateJourneyActivity.this, "Fill out all the forms", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            JSONObject request = modelJourney.transferNewJourney(name, type, party, frequency);
-            SharedPreferences.Editor editor = appData.edit();       // SharedPreferences (설정 저장용 파일) 열기
-            editor.putBoolean(PREFS_NAME, true);
+            // 각 Field에 값 입력
+            // TODO: 중요한 변경사항::: status의 의미> true==입력가능,아직완료안된상태의 journey / false==summary까지 입력되고 난 완료된 journey
+            Call<ModelJourney> call = retrofitInterface.createJourney(name, type, party, frequency, true, false, ModelUser.USER.getId(), ModelUser.USER.getUserName());
 
-            editor.putString("Journey_Name", name);
-            editor.putString("Journey_Type", type);
-            editor.putString("Journey_Party", party);
-            editor.putInt("Journey_Frequency", frequency);
-
-            editor.apply();
-
-
-            Call<ModelJourney> call = retrofitConnection.server.createJourney(request);
-            Log.i("뭔가", request.toString());
 
             call.enqueue(new Callback<ModelJourney>() {
                 @Override
                 public void onResponse(Call<ModelJourney> call, Response<ModelJourney> response) {
                     if(response.code() == 200){
                         Toast.makeText(CreateJourneyActivity.this, "Journey Created", Toast.LENGTH_SHORT).show();
+                        saveNewJourney();
+                        Intent intent = new Intent(CreateJourneyActivity.this, RecordJourneyActivity.class);
+                        startActivity(intent);
                     } else if(response.code() == 400) {
                         Toast.makeText(CreateJourneyActivity.this, "Journey creation failed", Toast.LENGTH_LONG).show();
+                        Log.i("아아아ㅏㅇ", response.message());
 
                     }
                 }
@@ -205,6 +206,19 @@ public class CreateJourneyActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    // Save new journey to 'currentJourney'
+    private void saveNewJourney() {
+        ModelJourney currentJourney = new ModelJourney();
+        currentJourney.name = name;
+        currentJourney.type = type;
+        currentJourney.party = party;
+        currentJourney.frequency = frequency;
+        currentJourney.status = true;
+        currentJourney.shared = false;
+
+        ModelJourney.setCurrentJourney(currentJourney);
     }
 
 

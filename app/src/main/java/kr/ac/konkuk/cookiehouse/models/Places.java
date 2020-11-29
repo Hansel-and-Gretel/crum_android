@@ -1,4 +1,4 @@
-package kr.ac.konkuk.cookiehouse.DataStorage;
+package kr.ac.konkuk.cookiehouse.models;
 
 import android.os.Build;
 import android.os.Parcel;
@@ -14,6 +14,7 @@ public class Places implements Parcelable {     // 시스템 위한 구조체
     public final String note;
     public final String category;
     public final boolean status;
+
 
 
     // Places 구조체 객체 만들 때 사용
@@ -44,6 +45,45 @@ public class Places implements Parcelable {     // 시스템 위한 구조체
         else {
             status = src.readByte() == 1;  // readBoolean 버전 문제: boolean으로 다시 변환
         }
+    }
+
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 
     // Parcelable 구조체에 기록하는 함수 (주의: 순서 같아야 함)
