@@ -30,7 +30,7 @@ public class PathListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     PlacesDBControl myDb;
-    ArrayList<String> place_id, place_name, place_time, place_lon, place_lat;
+    ArrayList<String> place_id, place_name, place_time, place_lon, place_lat, place_photo, place_note, place_category, place_status;
     AdapterLocation adapterLocation;
 
 
@@ -48,10 +48,14 @@ public class PathListActivity extends AppCompatActivity {
         place_time = new ArrayList<>();
         place_lon = new ArrayList<>();
         place_lat = new ArrayList<>();
+        place_photo = new ArrayList<>();
+        place_note= new ArrayList<>();
+        place_category= new ArrayList<>();
+        place_status= new ArrayList<>();
 
         storePathInArrays();
 
-        adapterLocation = new AdapterLocation(PathListActivity.this, place_id, place_name, place_time, place_lon, place_lat);
+        adapterLocation = new AdapterLocation(PathListActivity.this, place_id, place_name, place_time, place_lon, place_lat, place_photo, place_note, place_category, place_status);
         recyclerView.setAdapter(adapterLocation);
         recyclerView.setLayoutManager(new LinearLayoutManager(PathListActivity.this));
 
@@ -70,6 +74,10 @@ public class PathListActivity extends AppCompatActivity {
                 place_time.add(cursor.getString(2));
                 place_lon.add(cursor.getString(3));
                 place_lat.add(cursor.getString(4));
+                place_photo.add(cursor.getString(5));
+                place_note.add(cursor.getString(6));
+                place_category.add(cursor.getString(7));
+                place_status.add(cursor.getString(8));
 
             }
         }

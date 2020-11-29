@@ -133,6 +133,8 @@ public class PlacesDBControl{
         return cursor;
     }
 
+
+
 //    public boolean edit(Places place, int placeID){
 //
 //    }
@@ -213,6 +215,8 @@ public class PlacesDBControl{
                 new String[]{String.valueOf(place.getId())});
         database.close();
     }
+
+
 
 
 
