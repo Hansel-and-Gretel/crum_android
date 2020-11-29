@@ -97,6 +97,7 @@ public class StartActivity extends AppCompatActivity {
 
 
                         if(loginResponse.code() == 200){
+                            USER = null;
                             USER = loginResponse.body();    // store user info into model
                             Log.i("USER_ID", String.valueOf(USER.getId()));
                             // TODO 지워야대 --> 테스트용

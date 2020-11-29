@@ -50,6 +50,16 @@ public class ModelJourney {
     public ModelJourney() {
     }
 
+
+    public ModelJourney(String name, String type, String party, int frequency, boolean status) {
+        this.name = name;
+        this.type = type;
+        this.party = party;
+        this.frequency = frequency;
+        this.status = status;
+    }
+
+
     public ModelJourney(int id, String name, String type, String party, int frequency, String summary, String image, boolean status, boolean shared, String userId, String userName) {
         this.id = id;
         this.name = name;
@@ -62,14 +72,6 @@ public class ModelJourney {
         this.shared = shared;
         this.userId = userId;
         this.userName = userName;
-    }
-
-    public ModelJourney(String name, String type, String party, int frequency, boolean status) {
-        this.name = name;
-        this.type = type;
-        this.party = party;
-        this.frequency = frequency;
-        this.status = status;
     }
 
     public static ModelJourney getCurrentJourney() {
