@@ -30,7 +30,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Path.PostJourneyActivity" />
-        <activity android:name=".Path.PlaceDetailActivity" />
+        <activity android:name=".Path.PlaceDetailActivity"
+            android:launchMode="sin"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
