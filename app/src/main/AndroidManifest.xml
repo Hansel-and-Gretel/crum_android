@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Path.PlaceDetailActivity"></activity>
+        <activity android:name=".Path.PostJourneyActivity"></activity>
+        <activity android:name=".Path.PlaceDetailActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -30,7 +31,7 @@
         -->
         <activity
             android:name=".Path.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity android:name=".Path.PathListActivity" />
         <activity android:name=".Social.JourneyDetailActivity" />
 

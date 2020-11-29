@@ -68,7 +68,7 @@ public class RecordJourneyActivity extends AppCompatActivity implements
 
     public static final String TAG = "MyTag";
     private TextView mOutputText;
-    private Button mBtnLocationRequest, mBtnStartService, mBtnStopService, mBtnList, mBtnMap;
+    private Button mBtnLocationRequest, mBtnStartService, mBtnStopService, mBtnList, mBtnMap, mBtnFinish;
     private FusedLocationProviderClient mLocationClient;
     private LocationCallback mLocationCallback;
 
@@ -88,6 +88,7 @@ public class RecordJourneyActivity extends AppCompatActivity implements
         mBtnStopService = findViewById(R.id.stop_btn);
         mBtnList = findViewById(R.id.list_btn);
         mBtnMap = findViewById(R.id.map_btn);
+        mBtnFinish = findViewById(R.id.finishBtn);
 
 
         locationinit();
@@ -155,6 +156,15 @@ public class RecordJourneyActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 Intent intent_map = new Intent(RecordJourneyActivity.this, MapsActivity.class);
                 startActivity(intent_map);
+            }
+        });
+
+        mBtnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RecordJourneyActivity.this, PostJourneyActivity.class);
+                startActivity(intent);
             }
         });
 
