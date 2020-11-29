@@ -4,9 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.net.URL;
@@ -43,7 +47,7 @@ public class PlacesDBControl{
         placesDB = context.openOrCreateDatabase(helper.PLACES_DATABASE_NAME, Context.MODE_PRIVATE, null);
         placesDB = helper.getWritableDatabase();
         // TODO: db 저장경로 다른 곳으로 하고싶으면 사용하삼
-        // final String DB_ADDRESS = Environment.getDataDirectory().getAbsolutePath() +"/data/"+ PACKAGE_NAME + "/databases/places.db";
+//         final String DB_ADDRESS = Environment.getDataDirectory().getAbsolutePath() +"/data/"+ PACKAGE_NAME + "/databases/places.db";
     }
 
 //        Runnable(new Runnable() {
@@ -214,6 +218,73 @@ public class PlacesDBControl{
         database.delete(helper.TABLE_NAME, "place_id=?",
                 new String[]{String.valueOf(place.getId())});
         database.close();
+    }
+
+
+
+    /*
+    *
+    * 이건 현재 sqlite파일을 json으로 바꾼 내용입니다.
+    *
+    * json을 gson으로 전환해서 (Gson gson = new Gson();)
+    * 서버에 보내면 되요요
+    *
+    * 아 근데 그냥 json으로 보내면 되나?
+    *
+    * https://github.com/google/gson
+    * https://re-build.tistory.com/41
+    *
+   * */
+
+    public JSONArray getResults()
+    {
+
+//        String myPath = DB_PATH + helper.PLACES_DATABASE_NAME;// Set path to your database
+
+        String myTable = helper.TABLE_NAME;//Set name of your table
+
+
+        SQLiteDatabase myDataBase = SQLiteDatabase.openDatabase(String.valueOf(context.getDatabasePath("places.db")), null, SQLiteDatabase.OPEN_READONLY);
+
+        String searchQuery = "SELECT  * FROM " + myTable;
+        Cursor cursor = myDataBase.rawQuery(searchQuery, null );
+
+        JSONArray resultSet = new JSONArray();
+
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() == false) {
+
+            int totalColumn = cursor.getColumnCount();
+            JSONObject rowObject = new JSONObject();
+
+            for( int i=0 ;  i< totalColumn ; i++ )
+            {
+                if( cursor.getColumnName(i) != null )
+                {
+                    try
+                    {
+                        if( cursor.getString(i) != null )
+                        {
+                            Log.d("TAG_NAME", cursor.getString(i) );
+                            rowObject.put(cursor.getColumnName(i) ,  cursor.getString(i) );
+                        }
+                        else
+                        {
+                            rowObject.put( cursor.getColumnName(i) ,  "" );
+                        }
+                    }
+                    catch( Exception e )
+                    {
+                        Log.d("TAG_NAME", e.getMessage()  );
+                    }
+                }
+            }
+            resultSet.put(rowObject);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        Log.d("TAG_NAME", resultSet.toString() );
+        return resultSet;
     }
 
 
