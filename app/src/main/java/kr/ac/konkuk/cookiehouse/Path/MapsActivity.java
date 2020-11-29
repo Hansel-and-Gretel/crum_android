@@ -16,7 +16,9 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -42,7 +44,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import kr.ac.konkuk.cookiehouse.DataStorage.PlacesDBControl;
 import kr.ac.konkuk.cookiehouse.R;
@@ -65,11 +69,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private EditText mSearchAddress;
 
 
+
     //건대 위치 기본
     private LatLng ku = new LatLng(50.0, 8.58275032043457);
 
     // 마커리스트
     List<Marker> markerList;
+    List<ModelPlaces> placesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +143,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapLongClickListener(this);
 
         markerList = new ArrayList<>();
-        List<ModelPlaces> placesList = db.getAllPlaces();
+        placesList = db.getAllPlaces();
 
         for(ModelPlaces p : placesList){
             String myInfo = "ID: "+p.getId()+" Lat: "+p.getLatitude() + " Lng: "+p.getLongitude()+" place NAME "+p.getName();
@@ -175,6 +181,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onMarkerClick(Marker marker) {
 
         Toast.makeText(this, "현재 마커 위치:"+marker.getPosition().toString(), Toast.LENGTH_SHORT).show();
+
+        int i = Integer.parseInt(marker.getTitle());
+
+        ModelPlaces p = placesList.get(i);
+        Intent intent = new Intent(this, PlaceDetailActivity.class);
+        intent.putExtra("what",false);
+        intent.putExtra("id",p.getId()); // 해당 포스트가 클릭될때 해당 id로 포스트 디테일을 가져옴
+        Log.d("log", "onClick:보내요 "+p.getId());
+        intent.putExtra("name",p.getName());
+        intent.putExtra("time",p.getTime());
+        intent.putExtra("lat",p.getLatitude());
+        intent.putExtra("lon",p.getLongitude());
+        intent.putExtra("photo",p.getPhoto());
+        intent.putExtra("note",p.getNote());
+        intent.putExtra("category",p.getCategory());
+        intent.putExtra("status",p.isStatus());
+        this.startActivity(intent);
+
 
 
         return false;

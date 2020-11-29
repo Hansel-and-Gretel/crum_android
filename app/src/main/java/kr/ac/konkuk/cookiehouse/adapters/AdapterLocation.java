@@ -58,9 +58,11 @@ public class AdapterLocation extends RecyclerView.Adapter<AdapterLocation.MyView
         String name = String.valueOf(place_name.get(i));
 
         String time = String.valueOf(place_time.get(i));
+
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(time));
         String timestamp = DateFormat.format("yyyy/MM/dd hh:mm aa", calendar).toString();
+
         String lon = String.valueOf(place_lon.get(i));
         String lat = String.valueOf(place_lat.get(i));
         String photo = String.valueOf(place_photo.get(i));
@@ -86,6 +88,7 @@ public class AdapterLocation extends RecyclerView.Adapter<AdapterLocation.MyView
                 // 이미지 선택하면 포스트 상세 페이지 postdetail activity
 //                Toast.makeText(context, ""+placeId, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, PlaceDetailActivity.class);
+                intent.putExtra("what",true);
                 intent.putExtra("id",placeId); // 해당 포스트가 클릭될때 해당 id로 포스트 디테일을 가져옴
                 Log.d("log", "onClick:보내요 "+placeId);
                 intent.putExtra("name",name);
